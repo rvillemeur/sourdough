@@ -1,7 +1,7 @@
 Class {
 	#name : #SourdoughModelTest,
 	#superclass : #TestCase,
-	#category : #'Sourdough-Test'
+	#category : #'Sourdough-Tests'
 }
 
 { #category : #testing }
