@@ -1,1 +1,1 @@
-Package { #name : #Sourdough }
+Package { #name : #sourdough }
