@@ -10,5 +10,6 @@ BaselineOfSourdough >> baseline: spec [
 	spec
 		for: #common
 		do: [ spec
-				package: 'Sourdough' ]
+				package: 'Sourdough-model';
+				package: 'Sourdough-test' with: [ spec requires: #('Sourdough-model') ]]
 ]
