@@ -39,58 +39,8 @@ Class {
 	#category : #'Sourdough-UI'
 }
 
-{ #category : #specs }
-SourdoughUi class >> defaultSpec [
-	<spec: #default>
-	| fontWidth rowHeight inputWidth |
-	fontWidth := StandardFonts defaultFont widthOfString: 'M'.
-	inputWidth := fontWidth * 3.
-	rowHeight := self inputTextHeight.
-	^ SpecLayout composed
-		newColumn: [ :col | 
-			"top label"
-			col
-				newRow: [ :row | 
-					row
-						add: #requiredQuantityLabel;
-						add: #addedQuantityLabel ]
-				height: rowHeight.
-
-			"values entered by the user"
-			col
-				newRow: [ :row | 
-					row
-						newColumn: [ :leftColumn | 
-							leftColumn
-								newRow: [ :inRow | 
-									inRow
-										add: #flourLabel;
-										add: #flourInput width: inputWidth ]
-								height: rowHeight.
-							leftColumn
-								newRow: [ :inRow | 
-									inRow
-										add: #doughHydratationLevelLabel;
-										add: #doughHydratationLevelInput width: inputWidth ]
-								height: rowHeight.
-							leftColumn
-								newRow: [ :inRow | 
-									inRow
-										add: #saltRateLabel;
-										add: #saltRateInput width: inputWidth ]
-								height: rowHeight.
-							leftColumn
-								newRow: [ :inRow | 
-									inRow
-										add: #sourdoughHydrationLevelLabel;
-										add: #sourdoughHydrationLevelInput width: inputWidth ]
-								height: rowHeight.
-							leftColumn
-								newRow: [ :inRow | 
-									inRow
-										add: #sourdoughFlourRateLabel;
-										add: #sourdoughFlourRateInput width: inputWidth ]
-								height: rowHeight ].
+{ #category : #'as yet unclassified' }
+SourdoughUi class >> addedValue: row width: inputWidth height: rowHeight [ 
 					"computed values"
 					row
 						newColumn: [ :rightColumn | 
@@ -123,7 +73,31 @@ SourdoughUi class >> defaultSpec [
 									inRow
 										add: #totalDoughWeightLabel;
 										add: #totalDoughWeightInput width: inputWidth ]
-								height: rowHeight ] ].
+								height: rowHeight ]
+]
+
+{ #category : #specs }
+SourdoughUi class >> defaultSpec [
+	<spec: #default>
+	| fontWidth rowHeight inputWidth |
+	fontWidth := StandardFonts defaultFont widthOfString: 'M'.
+	inputWidth := fontWidth * 3.
+	rowHeight := self inputTextHeight.
+	^ SpecLayout composed
+		newColumn: [ :col | 
+			"top label"
+			col
+				newRow: [ :row | 
+					row
+						add: #requiredQuantityLabel;
+						add: #addedQuantityLabel ]
+				height: rowHeight.
+
+			"values entered by the user"
+			col
+				newRow: [ :row | 
+					self wishedValue: row width: inputWidth height: rowHeight.
+					self addedValue: row width: inputWidth height: rowHeight ].
 			col newRow: [ :row | row add: #informationLabel ] height: rowHeight.
 			col
 				newRow: [ :row | 
@@ -154,8 +128,7 @@ SourdoughUi class >> defaultSpec [
 					row
 						add: #sourdoughFlourLabel;
 						add: #sourdoughFlourInput width: inputWidth ]
-				height: rowHeight.
-			];
+				height: rowHeight ];
 		yourself
 ]
 
@@ -163,6 +136,42 @@ SourdoughUi class >> defaultSpec [
 SourdoughUi class >> open [
 	<example>
 	^ self new openWithSpec
+]
+
+{ #category : #'as yet unclassified' }
+SourdoughUi class >> wishedValue: row width: inputWidth height: rowHeight [
+row
+						newColumn: [ :leftColumn | 
+							leftColumn
+								newRow: [ :inRow | 
+									inRow
+										add: #flourLabel;
+										add: #flourInput width: inputWidth ]
+								height: rowHeight.
+							leftColumn
+								newRow: [ :inRow | 
+									inRow
+										add: #doughHydratationLevelLabel;
+										add: #doughHydratationLevelInput width: inputWidth ]
+								height: rowHeight.
+							leftColumn
+								newRow: [ :inRow | 
+									inRow
+										add: #saltRateLabel;
+										add: #saltRateInput width: inputWidth ]
+								height: rowHeight.
+							leftColumn
+								newRow: [ :inRow | 
+									inRow
+										add: #sourdoughHydrationLevelLabel;
+										add: #sourdoughHydrationLevelInput width: inputWidth ]
+								height: rowHeight.
+							leftColumn
+								newRow: [ :inRow | 
+									inRow
+										add: #sourdoughFlourRateLabel;
+										add: #sourdoughFlourRateInput width: inputWidth ]
+								height: rowHeight ].
 ]
 
 { #category : #accessing }
