@@ -11,7 +11,7 @@ I give all the measure and information necessary to make sourdough bread.
 "
 Class {
 	#name : #SourdoughModel,
-	#superclass : #Object,
+	#superclass : #Model,
 	#instVars : [
 		'flour',
 		'doughHydrationLevel',
