@@ -78,7 +78,6 @@ SourdoughUi class >> addedValue: row width: inputWidth height: rowHeight [
 
 { #category : #specs }
 SourdoughUi class >> defaultSpec [
-	<spec: #default>
 	| fontWidth rowHeight inputWidth |
 	fontWidth := StandardFonts defaultFont widthOfString: 'M'.
 	inputWidth := fontWidth * 3.
@@ -90,8 +89,8 @@ SourdoughUi class >> defaultSpec [
 				newRow: [ :row | 
 					row
 						add: #requiredQuantityLabel;
-						add: #addedQuantityLabel ]
-				height: rowHeight.
+						add: #addedQuantityLabel ] height: rowHeight.
+
 
 			"values entered by the user"
 			col
@@ -130,6 +129,114 @@ SourdoughUi class >> defaultSpec [
 						add: #sourdoughFlourInput width: inputWidth ]
 				height: rowHeight ];
 		yourself
+]
+
+{ #category : #specs }
+SourdoughUi class >> defaultSpec2 [
+	<spec: #default>
+	| spLayout inputWidth |
+	inputWidth := (StandardFonts defaultFont widthOfString: 'M') * 3.
+	spLayout := SpecTableLayout new.
+	spLayout
+		cellSpacing: #localRect;
+		listSpacing: #equal;
+		cellPositioning: #center;
+		hResizing:#shrinkWrap;
+		vResizing:#shrinkWrap.
+	spLayout
+		newRow: [ :row | 
+			row
+				newColumn: [ :col | 
+					col newRow: [ :inRow | inRow add: #requiredQuantityLabel ].
+					col
+						newRow: [ :inRow | 
+							inRow
+								newColumn:
+									[ :inCol | inCol newRow: [ :valRow | valRow add: #flourLabel ] ].
+							inRow
+								newColumn:
+									[ :inCol | inCol newRow: [ :valRow | valRow add: #flourInput ] ] ].
+					col
+						newRow: [ :inRow | 
+							inRow
+								add: #doughHydratationLevelLabel;
+								add: #doughHydratationLevelInput ].
+					col
+						newRow: [ :inRow | 
+							inRow
+								add: #saltRateLabel;
+								add: #saltRateInput ].
+					col
+						newRow: [ :inRow | 
+							inRow
+								add: #sourdoughHydrationLevelLabel;
+								add: #sourdoughHydrationLevelInput ].
+					col
+						newRow: [ :inRow | 
+							inRow
+								add: #sourdoughFlourRateLabel;
+								add: #sourdoughFlourRateInput ] ].
+			row
+				newColumn: [ :col | 
+					col newRow: [ :inRow | inRow add: #addedQuantityLabel ].
+					col
+						newRow: [ :inRow | 
+							inRow
+								add: #pouringWaterLabel;
+								add: #pouringWaterInput ].
+					col
+						newRow: [ :inRow | 
+							inRow
+								add: #sourdoughLabel;
+								add: #sourdoughInput ].
+					col
+						newRow: [ :inRow | 
+							inRow
+								add: #saltOnPouringWaterLabel;
+								add: #saltOnPouringWaterInput ].
+					col
+						newRow: [ :inRow | 
+							inRow
+								add: #saltOnTotalWaterLabel;
+								add: #saltOnTotalWaterInput ].
+					col
+						newRow: [ :inRow | 
+							inRow
+								add: #totalDoughWeightLabel;
+								add: #totalDoughWeightInput ] ] ].
+	spLayout
+		newRow: [ :row | 
+			row
+				add: #informationLabel;
+				"layoutInset: 200 @ 0;"
+				cellInset: 6;
+				listCentering: #center].
+	spLayout
+		newRow: [ :row | 
+			row
+				add: #apparentHydrationLevelLabel;
+				add: #apparentHydrationLevelInput ].
+	spLayout
+		newRow: [ :row | 
+			row
+				add: #totalWaterWeightLabel;
+				add: #totalWaterWeightInput ].
+	spLayout
+		newRow: [ :row | 
+			row
+				add: #totalFlourLabel;
+				add: #totalFlourInput ].
+	spLayout
+		newRow: [ :row | 
+			row
+				add: #sourdoughWaterLabel;
+				add: #sourdoughWaterInput ].
+	spLayout
+		newRow: [ :row | 
+			row
+				add: #sourdoughFlourLabel;
+				add: #sourdoughFlourInput ].
+	^ spLayout
 ]
 
 { #category : #examples }
@@ -224,9 +331,9 @@ SourdoughUi >> doughHydratationLevelLabel: anObject [
 	doughHydratationLevelLabel := anObject
 ]
 
-{ #category : #initialization }
+{ #category : #api }
 SourdoughUi >> extent [
-^ 590@ 400
+^600@600
 ]
 
 { #category : #accessing }
