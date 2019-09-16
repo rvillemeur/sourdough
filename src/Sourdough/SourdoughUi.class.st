@@ -1,3 +1,6 @@
+"
+SourdoughUi open
+"
 Class {
 	#name : #SourdoughUi,
 	#superclass : #ComposablePresenterWithModel,
@@ -92,10 +95,10 @@ SourdoughUi class >> defaultSpec [
 			col
 				newRow: [ :row | 
 					row
-						add: #totalDoughWeightLabel;
-						add: #totalDoughWeightInput width: inputWidth;
 						add: #sourdoughFlourRateLabel;
-						add: #sourdoughFlourRateInput width: inputWidth ]
+						add: #sourdoughFlourRateInput width: inputWidth;
+						add: #totalDoughWeightLabel;
+						add: #totalDoughWeightInput width: inputWidth ]
 					height: rowHeight.
 					
 				
@@ -130,13 +133,13 @@ SourdoughUi class >> defaultSpec [
 					row
 						add: #sourdoughFlourLabel;
 						add: #sourdoughFlourInput width: inputWidth ]
-				height: rowHeight ]  left: 0 right: 0 ;
+				height: rowHeight ] ;
 		yourself
 ]
 
 { #category : #specs }
 SourdoughUi class >> defaultSpec2 [
-	<spec: #default>
+
 	| spLayout |
 	spLayout := SpecTableLayout new.
 
@@ -323,7 +326,22 @@ SourdoughUi >> doughHydratationLevelLabel: anObject [
 
 { #category : #api }
 SourdoughUi >> extent [
-^600@250
+^600@390
+]
+
+{ #category : #'model updates' }
+SourdoughUi >> fillFormWithWorkingModel [
+	self apparentHydrationLevelInput
+		text: self model apparentHydrationLevel * 100.
+	self pouringWaterInput text: self model pouringWater.
+	self saltOnPouringWaterInput text: self model saltOnPouringWater.
+	self saltOnTotalWaterInput text: self model saltOnTotalWater.
+	self sourdoughInput text: self model sourdough.
+	self sourdoughFlourInput text: self model sourdoughFlour.
+	self sourdoughWaterInput text: self model sourdoughWater.
+	self totalDoughWeightInput text: self model totalDoughWeight.
+	self totalFlourInput text: self model totalFlour.
+	self totalWaterWeightInput text: self model totalWaterWeight
 ]
 
 { #category : #accessing }
@@ -375,16 +393,38 @@ SourdoughUi >> informationWidgets [
 	totalWaterWeightInput := self newTextInput enabled: false.
 ]
 
+{ #category : #api }
+SourdoughUi >> initialize [
+	self
+		model:
+			(SourdoughModel
+				flour: 500
+				doughHydrationLevel: 0.6
+				saltRate: 0.03
+				sourdoughHydrationLevel: 0.6
+				sourdoughFlourRate: 0.5).
+	super initialize
+]
+
 { #category : #initialization }
 SourdoughUi >> initializePresenter [
-	^nil
-	"self number1Input whenTextChanged: [ 
-		| receivedText newText |
-		receivedText := self number1Input text asString.
-		newText := receivedText select: [ :aCharacter | aCharacter isDigit ].
-		newText = receivedText ifFalse: [ 
-			self number1Input textHolder rawValue: newText.
-			self number1Input textHolder valueChanged: newText] ]"
+	self flourInput
+		whenTextChanged: [ self model flour: self flourInput text asInteger.
+			self announcingObject valueChanged ].
+	self doughHydratationLevelInput
+		whenTextChanged:
+			[ self model doughHydrationLevel: self doughHydratationLevelInput text asInteger percent .
+			self announcingObject valueChanged ].
+	self saltRateInput
+		whenTextChanged: [ self model saltRate: self saltRateInput text asInteger percent.
+			self announcingObject valueChanged ].
+	self sourdoughHydrationLevelInput
+		whenTextChanged: [ self model
+				sourdoughHydrationLevel: self sourdoughHydrationLevelInput text asInteger percent.
+			self announcingObject valueChanged ].
+	self sourdoughFlourRateInput
+		whenTextChanged: [ self model sourdoughFlourRate: self sourdoughFlourRateInput text asInteger percent.
+			self announcingObject valueChanged ]
 ]
 
 { #category : #initialization }
@@ -404,6 +444,11 @@ SourdoughUi >> initializeWidgets [
 		add: saltRateInput;
 		add: sourdoughHydrationLevelInput;
 		add: sourdoughFlourRateInput.
+]
+
+{ #category : #api }
+SourdoughUi >> modelChanged [
+	self fillFormWithWorkingModel
 ]
 
 { #category : #accessing }
