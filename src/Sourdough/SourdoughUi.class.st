@@ -3,7 +3,7 @@ SourdoughUi open
 "
 Class {
 	#name : #SourdoughUi,
-	#superclass : #ComposablePresenterWithModel,
+	#superclass : #SpPresenterWithModel,
 	#instVars : [
 		'requiredQuantityLabel',
 		'addedQuantityLabel',
@@ -44,228 +44,56 @@ Class {
 
 { #category : #specs }
 SourdoughUi class >> defaultSpec [
-"implementation with row and columns, the final layout is difficult to obtain"
-	| fontWidth rowHeight inputWidth |
-	fontWidth := StandardFonts defaultFont widthOfString: 'M'.
-	inputWidth := fontWidth * 3 + 5.
-	rowHeight := ComposablePresenter inputTextHeight.
-	^ SpecColumnLayout composed
-		newColumn: [ :col | 
-			"top label"
-			col
-				newRow: [ :row | 
-					row
-						add: #requiredQuantityLabel;
-						add: #addedQuantityLabel ] height: rowHeight.
-
-			"values entered by the user"
-			col
-				newRow: [ :row | 
-					row
-						add: #flourLabel;
-						add: #flourInput width: inputWidth;
-						add: #pouringWaterLabel;
-						add: #pouringWaterInput width: inputWidth ] 	
-					height: rowHeight.
-			col
-				newRow: [ :row | 
-					row
-						add: #doughHydratationLevelLabel;
-						add: #doughHydratationLevelInput width: inputWidth;
-						add: #sourdoughLabel;
-						add: #sourdoughInput width: inputWidth ]
-					height: rowHeight.
-			col
-				newRow: [ :row | 
-					row
-						add: #saltRateLabel;
-						add: #saltRateInput width: inputWidth;
-						add: #saltOnPouringWaterLabel;
-						add: #saltOnPouringWaterInput width: inputWidth]
-					height: rowHeight.
-			col
-				newRow: [ :row | 
-					row
-						add: #sourdoughHydrationLevelLabel;
-						add: #sourdoughHydrationLevelInput width: inputWidth;
-						add: #saltOnTotalWaterLabel;
-						add: #saltOnTotalWaterInput width: inputWidth]
-					height: rowHeight.
-					
-			col
-				newRow: [ :row | 
-					row
-						add: #sourdoughFlourRateLabel;
-						add: #sourdoughFlourRateInput width: inputWidth;
-						add: #totalDoughWeightLabel;
-						add: #totalDoughWeightInput width: inputWidth ]
-					height: rowHeight.
-					
-				
-				
-			col newRow: [ :row | row add: #informationLabel ] height: rowHeight.
-			col
-				newRow: [ :row | 
-					row
-						add: #apparentHydrationLevelLabel;
-						add: #apparentHydrationLevelInput width: inputWidth ]
-				height: rowHeight.
-			col
-				newRow: [ :row | 
-					row
-						add: #totalWaterWeightLabel;
-						add: #totalWaterWeightInput width: inputWidth ]
-				height: rowHeight.
-			col
-				newRow: [ :row | 
-					row
-						add: #totalFlourLabel;
-						add: #totalFlourInput width: inputWidth ]
-				height: rowHeight.
-			col
-				newRow: [ :row | 
-					row
-						add: #sourdoughWaterLabel;
-						add: #sourdoughWaterInput width: inputWidth ]
-				height: rowHeight.
-			col
-				newRow: [ :row | 
-					row
-						add: #sourdoughFlourLabel;
-						add: #sourdoughFlourInput width: inputWidth ]
-				height: rowHeight ] ;
+	^ SpBoxLayout newVertical
+		add:
+			(SpGridLayout new rowSpacing:15; 
+			"first title row"
+				add: #requiredQuantityLabel at: 1@1 span: 2@1;
+				add: #addedQuantityLabel at: 3@1 span: 4@1;
+				"second row"
+				add: 'flour quantity' at: 1 @ 2;
+				add: #flourInput at: 2 @ 2;
+				add: 'pouring water' at: 3@2;
+				add: #pouringWaterInput at: 4@2;
+				"third row"
+				add: 'desired hydration level for the dough (%)' at: 1 @ 3;
+				add: #doughHydratationLevelInput at: 2 @ 3;
+				add: 'sourdough' at: 3@3;
+				add: #sourdoughInput at: 4@3;
+				"fourth row"
+				add: 'proportion of salt' at: 1@4;
+				add: #saltRateInput at: 2@4;
+				add: #saltOnPouringWaterLabel at: 3@4;
+				add: #saltOnPouringWaterInput at: 4@4;
+				"fifth row"
+				add: 'hydration level of your sourdough (%)' at: 1@5;
+				add: #sourdoughHydrationLevelInput at: 2@5;
+				add: #saltOnTotalWaterLabel at: 3@5;
+				add: #saltOnTotalWaterInput at: 4@5;
+				"sixth row"
+				add: 'Proportion of sourdough' at: 1@6;
+				add: #sourdoughFlourRateInput at: 2@6;
+				add: #totalDoughWeightLabel at: 3@6;
+				add: #totalDoughWeightInput at: 4@6;
+				"seventh row"
+				add: #informationLabel at: 1@7 span: 4@7;
+				"eigth row"
+				add: 'apparent dough hydration rate' at: 1@8 span: 2@8;
+				add: #apparentHydrationLevelInput at: 3@8 span: 4@8;
+				"ninth row"
+				add: 'total amount of water in the dough' at: 1@9 span: 2@9;
+				add: #totalWaterWeightInput at: 3@9 span: 4@9;
+				"tenth row"
+				add: 'total amount of flour in the dough' at: 1@10 span: 2@10;
+				add: #totalFlourInput at: 3@10 span: 4@10;
+				"eleventh row"
+				add: 'water in sourdough' at: 1@11 span: 2@11;
+				add: #sourdoughWaterInput at: 3@11 span: 4@11;
+				"twelth row"
+				add: 'flour in sourdough' at: 1@12 span: 2@12;
+				add: #sourdoughFlourInput at: 3@12 span: 4@12;
+				yourself);
 		yourself
-]
-
-{ #category : #specs }
-SourdoughUi class >> defaultSpec2 [
-
-	| spLayout |
-	spLayout := SpecTableLayout new.
-
-	spLayout
-		newRow: [ :row | row
-				newColumn: [ :col | 
-					col newRow: [ :inRow | inRow add: #requiredQuantityLabel ].
-					col
-						newRow: [ :inRow | 
-							inRow
-								newColumn:
-									[ :inCol | inCol newRow: [ :valRow | valRow add: #flourLabel ] ].
-							inRow
-								newColumn:
-									[ :inCol | inCol newRow: [ :valRow | valRow add: #flourInput ] ]].
-					col
-						newRow: [ :inRow | 
-							inRow
-								newColumn:
-									[ :inCol | inCol newRow: [ :valRow | valRow add: #doughHydratationLevelLabel ] ].
-							inRow
-								newColumn:
-									[ :inCol | inCol newRow: [ :valRow | valRow add: #doughHydratationLevelInput ] ]].
-					col
-						newRow: [ :inRow | 
-							inRow
-								newColumn:
-									[ :inCol | inCol newRow: [ :valRow | valRow add: #saltRateLabel ] ].
-							inRow
-								newColumn:
-									[ :inCol | inCol newRow: [ :valRow | valRow add: #saltRateInput ] ] ].
-					col
-						newRow: [ :inRow | 
-							inRow
-								newColumn:
-									[ :inCol | inCol newRow: [ :valRow | valRow add: #sourdoughHydrationLevelLabel ] ].
-							inRow
-								newColumn:
-									[ :inCol | inCol newRow: [ :valRow | valRow add: #sourdoughHydrationLevelInput ] ]].
-					col
-						newRow: [ :inRow | 
-							inRow
-								newColumn:
-									[ :inCol | inCol newRow: [ :valRow | valRow add: #sourdoughFlourRateLabel ] ].
-							inRow
-								newColumn:
-									[ :inCol | inCol newRow: [ :valRow | valRow add: #sourdoughFlourRateInput ] ] ]
-							];
-
-			newColumn: [ :col | 
-					col newRow: [ :inRow | inRow add: #addedQuantityLabel ].
-					col
-						newRow: [ :inRow | 
-							inRow
-								newColumn:
-									[ :inCol | inCol newRow: [ :valRow | valRow add: #pouringWaterLabel ] ].
-							inRow
-								newColumn:
-									[ :inCol | inCol newRow: [ :valRow | valRow add: #pouringWaterInput ] ] ].
-					col
-						newRow: [ :inRow | 
-							inRow
-								newColumn:
-									[ :inCol | inCol newRow: [ :valRow | valRow add: #sourdoughLabel ] ].
-							inRow
-								newColumn:
-									[ :inCol | inCol newRow: [ :valRow | valRow add: #sourdoughInput ] ] ].
-					col
-						newRow: [ :inRow | 
-							inRow
-								newColumn:
-									[ :inCol | inCol newRow: [ :valRow | valRow add: #saltOnPouringWaterLabel ] ].
-							inRow
-								newColumn:
-									[ :inCol | inCol newRow: [ :valRow | valRow add: #saltOnPouringWaterInput ] ] ].
-					col
-						newRow: [ :inRow | 
-							inRow
-								newColumn:
-									[ :inCol | inCol newRow: [ :valRow | valRow add: #saltOnTotalWaterLabel ] ].
-							inRow
-								newColumn:
-									[ :inCol | inCol newRow: [ :valRow | valRow add: #saltOnTotalWaterInput ] ] ].
-					col
-						newRow: [ :inRow | 
-							inRow
-								newColumn:
-									[ :inCol | inCol newRow: [ :valRow | valRow add: #totalDoughWeightLabel ] ].
-							inRow
-								newColumn:
-									[ :inCol | inCol newRow: [ :valRow | valRow add: #totalDoughWeightInput ] ] ]
-							]].
- .
-	spLayout
-		newRow: [ :row | 
-			row
-				add: #informationLabel;
-				"layoutInset: 200 @ 0;"
-				cellInset: 6;
-				listCentering: #center].
-	spLayout
-		newRow: [ :row | 
-			row
-				add: #apparentHydrationLevelLabel;
-				add: #apparentHydrationLevelInput ].
-	spLayout
-		newRow: [ :row | 
-			row
-				add: #totalWaterWeightLabel;
-				add: #totalWaterWeightInput ].
-	spLayout
-		newRow: [ :row | 
-			row
-				add: #totalFlourLabel;
-				add: #totalFlourInput ].
-	spLayout
-		newRow: [ :row | 
-			row
-				add: #sourdoughWaterLabel;
-				add: #sourdoughWaterInput ].
-	spLayout
-		newRow: [ :row | 
-			row
-				add: #sourdoughFlourLabel;
-				add: #sourdoughFlourInput ].
-	^ spLayout
 ]
 
 { #category : #'class initialization' }
@@ -276,7 +104,7 @@ SourdoughUi class >> initialize [
 { #category : #examples }
 SourdoughUi class >> open [
 	<example>
-	^ self new openWithSpec
+	^ self new openWithSpec 
 ]
 
 { #category : #'class initialization' }
@@ -322,6 +150,28 @@ SourdoughUi >> apparentHydrationLevelLabel: anObject [
 	apparentHydrationLevelLabel := anObject
 ]
 
+{ #category : #initialization }
+SourdoughUi >> connectPresenters [
+	self flourInput
+		whenTextChangedDo: [ self model flour: self flourInput text asInteger.
+			self announcingObject valueChanged ].
+	self doughHydratationLevelInput
+		whenTextChangedDo: [ self model
+				doughHydrationLevel: self doughHydratationLevelInput text asInteger percent.
+			self announcingObject valueChanged ].
+	self saltRateInput
+		whenTextChangedDo: [ self model saltRate: self saltRateInput text asInteger percent.
+			self announcingObject valueChanged ].
+	self sourdoughHydrationLevelInput
+		whenTextChangedDo: [ self model
+				sourdoughHydrationLevel: self sourdoughHydrationLevelInput text asInteger percent.
+			self announcingObject valueChanged ].
+	self sourdoughFlourRateInput
+		whenTextChangedDo: [ self model
+				sourdoughFlourRate: self sourdoughFlourRateInput text asInteger percent.
+			self announcingObject valueChanged ]
+]
+
 { #category : #accessing }
 SourdoughUi >> doughHydratationLevelInput [
 	^ doughHydratationLevelInput
@@ -342,24 +192,23 @@ SourdoughUi >> doughHydratationLevelLabel: anObject [
 	doughHydratationLevelLabel := anObject
 ]
 
-{ #category : #api }
-SourdoughUi >> extent [
-^600@390
-]
-
 { #category : #'model updates' }
 SourdoughUi >> fillFormWithWorkingModel [
 	self apparentHydrationLevelInput
-		text: self model apparentHydrationLevel * 100.
-	self pouringWaterInput text: self model pouringWater.
-	self saltOnPouringWaterInput text: self model saltOnPouringWater.
-	self saltOnTotalWaterInput text: self model saltOnTotalWater.
-	self sourdoughInput text: self model sourdough.
-	self sourdoughFlourInput text: self model sourdoughFlour.
-	self sourdoughWaterInput text: self model sourdoughWater.
-	self totalDoughWeightInput text: self model totalDoughWeight.
-	self totalFlourInput text: self model totalFlour.
-	self totalWaterWeightInput text: self model totalWaterWeight
+		text: (self model apparentHydrationLevel * 100) printString.
+	self pouringWaterInput text: self model pouringWater printString.
+	self saltOnPouringWaterInput
+		text: self model saltOnPouringWater printString.
+	self saltOnTotalWaterInput
+		text: self model saltOnTotalWater printString.
+	self sourdoughInput text: self model sourdough printString.
+	self sourdoughFlourInput text: self model sourdoughFlour printString.
+	self sourdoughWaterInput text: self model sourdoughWater printString.
+	self totalDoughWeightInput
+		text: self model totalDoughWeight printString.
+	self totalFlourInput text: self model totalFlour printString.
+	self totalWaterWeightInput
+		text: self model totalWaterWeight printString
 ]
 
 { #category : #accessing }
@@ -411,7 +260,7 @@ SourdoughUi >> informationWidgets [
 	totalWaterWeightInput := self newTextInput enabled: false.
 ]
 
-{ #category : #api }
+{ #category : #initialization }
 SourdoughUi >> initialize [
 	self
 		model:
@@ -425,28 +274,7 @@ SourdoughUi >> initialize [
 ]
 
 { #category : #initialization }
-SourdoughUi >> initializePresenter [
-	self flourInput
-		whenTextChanged: [ self model flour: self flourInput text asInteger.
-			self announcingObject valueChanged ].
-	self doughHydratationLevelInput
-		whenTextChanged:
-			[ self model doughHydrationLevel: self doughHydratationLevelInput text asInteger percent .
-			self announcingObject valueChanged ].
-	self saltRateInput
-		whenTextChanged: [ self model saltRate: self saltRateInput text asInteger percent.
-			self announcingObject valueChanged ].
-	self sourdoughHydrationLevelInput
-		whenTextChanged: [ self model
-				sourdoughHydrationLevel: self sourdoughHydrationLevelInput text asInteger percent.
-			self announcingObject valueChanged ].
-	self sourdoughFlourRateInput
-		whenTextChanged: [ self model sourdoughFlourRate: self sourdoughFlourRateInput text asInteger percent.
-			self announcingObject valueChanged ]
-]
-
-{ #category : #initialization }
-SourdoughUi >> initializeWidgets [
+SourdoughUi >> initializePresenters [
 
 	requiredQuantityLabel := self newLabel label: 'quantity required (in grams)'; emphasis: #bold.
 	addedQuantityLabel := self newLabel label: 'quantity to be added (in grams)'; emphasis: #bold.
@@ -462,6 +290,16 @@ SourdoughUi >> initializeWidgets [
 		add: saltRateInput;
 		add: sourdoughHydrationLevelInput;
 		add: sourdoughFlourRateInput.
+]
+
+{ #category : #initialization }
+SourdoughUi >> initializeWindow: aWindowPresenter [
+	aWindowPresenter
+		title: 'calculator for sourdough bread';
+		initialExtent: 600@390;
+		windowIcon: self windowIcon;
+		askOkToClose: false;
+		aboutText: 'Small tool to calculate proportion of sourdough'
 ]
 
 { #category : #api }
@@ -511,20 +349,31 @@ SourdoughUi >> quantityAddedWidgets [
 { #category : #widgets }
 SourdoughUi >> quantityWishedWidgets [
 	flourLabel := self newLabel label: 'flour quantity'.
-	flourInput := self newTextInput autoAccept: true; ghostText: '500'.
-	
-	doughHydratationLevelLabel := self newLabel label: 'desired hydration level for the dough (%)'.
-	doughHydratationLevelInput := self newTextInput autoAccept: true; ghostText: '60'.
-	
-	saltRateLabel := self newLabel label: 'proportion of salt'; help: '(between 2 and 3.5% of the weight of the casting water)'.
-	saltRateInput := self newTextInput autoAccept: true; ghostText: '3'.
-	
-	sourdoughHydrationLevelLabel := self newLabel 	label: 'hydration level of your sourdough (%)'.
-	sourdoughHydrationLevelInput := self newTextInput autoAccept: true; ghostText: '60'.
-	
-	sourdoughFlourRateLabel := self newLabel label: 'Proportion of sourdough';  help: '(in % of flour weight)'.
-	sourdoughFlourRateInput := self newTextInput autoAccept: true; ghostText: '50'.
-	
+	flourInput := self newTextInput
+		autoAccept: true;
+		placeholder: '500'.
+	doughHydratationLevelLabel := self newLabel
+		label: 'desired hydration level for the dough (%)'.
+	doughHydratationLevelInput := self newTextInput
+		autoAccept: true;
+		placeholder: '60'.
+	saltRateLabel := self newLabel
+		label: 'proportion of salt';
+		help: '(between 2 and 3.5% of the weight of the casting water)'.
+	saltRateInput := self newTextInput
+		autoAccept: true;
+		placeholder: '3'.
+	sourdoughHydrationLevelLabel := self newLabel
+		label: 'hydration level of your sourdough (%)'.
+	sourdoughHydrationLevelInput := self newTextInput
+		autoAccept: true;
+		placeholder: '60'.
+	sourdoughFlourRateLabel := self newLabel
+		label: 'Proportion of sourdough';
+		help: '(in % of flour weight)'.
+	sourdoughFlourRateInput := self newTextInput
+		autoAccept: true;
+		placeholder: '50'
 ]
 
 { #category : #accessing }
@@ -695,11 +544,6 @@ SourdoughUi >> sourdoughWaterLabel [
 { #category : #accessing }
 SourdoughUi >> sourdoughWaterLabel: anObject [
 	sourdoughWaterLabel := anObject
-]
-
-{ #category : #api }
-SourdoughUi >> title [
-	^ 'calculator for sourdough bread'
 ]
 
 { #category : #accessing }
