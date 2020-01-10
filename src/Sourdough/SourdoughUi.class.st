@@ -268,10 +268,28 @@ SourdoughUi class >> defaultSpec2 [
 	^ spLayout
 ]
 
+{ #category : #'class initialization' }
+SourdoughUi class >> initialize [
+	WorldState desktopMenuPragmaKeyword: 'worldMenu'.
+]
+
 { #category : #examples }
 SourdoughUi class >> open [
 	<example>
 	^ self new openWithSpec
+]
+
+{ #category : #'class initialization' }
+SourdoughUi class >> worldMenu: aBuilder [
+	<worldMenu>
+	(aBuilder item: #Sourdough)
+		order: 4.0;
+		with: [ (aBuilder item: 'calculate')
+				action: [ SourdoughUi  open ];
+				parent: #Sourdough;
+				icon: ThemeIcons current glamorousTable;
+				order: 0;
+				help: 'Launch sourdough UI'. ]
 ]
 
 { #category : #accessing }
