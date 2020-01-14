@@ -46,53 +46,53 @@ Class {
 SourdoughUi class >> defaultSpec [
 	^ SpBoxLayout newVertical
 		add:
-			(SpGridLayout new rowSpacing:15; 
-			"first title row"
-				add: #requiredQuantityLabel at: 1@1 span: 2@1;
-				add: #addedQuantityLabel at: 3@1 span: 4@1;
-				"second row"
-				add: 'flour quantity' at: 1 @ 2;
-				add: #flourInput at: 2 @ 2;
-				add: 'pouring water' at: 3@2;
-				add: #pouringWaterInput at: 4@2;
-				"third row"
-				add: 'desired hydration level for the dough (%)' at: 1 @ 3;
-				add: #doughHydratationLevelInput at: 2 @ 3;
-				add: 'sourdough' at: 3@3;
-				add: #sourdoughInput at: 4@3;
-				"fourth row"
-				add: 'proportion of salt' at: 1@4;
-				add: #saltRateInput at: 2@4;
-				add: #saltOnPouringWaterLabel at: 3@4;
-				add: #saltOnPouringWaterInput at: 4@4;
-				"fifth row"
-				add: 'hydration level of your sourdough (%)' at: 1@5;
-				add: #sourdoughHydrationLevelInput at: 2@5;
-				add: #saltOnTotalWaterLabel at: 3@5;
-				add: #saltOnTotalWaterInput at: 4@5;
-				"sixth row"
-				add: 'Proportion of sourdough' at: 1@6;
-				add: #sourdoughFlourRateInput at: 2@6;
-				add: #totalDoughWeightLabel at: 3@6;
-				add: #totalDoughWeightInput at: 4@6;
-				"seventh row"
-				add: #informationLabel at: 1@7 span: 4@7;
-				"eigth row"
-				add: 'apparent dough hydration rate' at: 1@8 span: 2@8;
-				add: #apparentHydrationLevelInput at: 3@8 span: 4@8;
-				"ninth row"
-				add: 'total amount of water in the dough' at: 1@9 span: 2@9;
-				add: #totalWaterWeightInput at: 3@9 span: 4@9;
-				"tenth row"
-				add: 'total amount of flour in the dough' at: 1@10 span: 2@10;
-				add: #totalFlourInput at: 3@10 span: 4@10;
-				"eleventh row"
-				add: 'water in sourdough' at: 1@11 span: 2@11;
-				add: #sourdoughWaterInput at: 3@11 span: 4@11;
-				"twelth row"
-				add: 'flour in sourdough' at: 1@12 span: 2@12;
-				add: #sourdoughFlourInput at: 3@12 span: 4@12;
+			(SpBoxLayout newHorizontal
+				add:
+					(SpGridLayout new beColumnNotHomogeneous; beRowHomogeneous;
+						column: 1 withConstraints: [ :c | c beExpand ];
+						column: 2 withConstraints: [ :c | c beNotExpand  ];
+						add: #requiredQuantityLabel at: 1 @ 1 span: 2 @ 1;
+						add: #flourLabel at: 1 @ 2;
+						add: #flourInput at: 2 @ 2;
+						add: #doughHydratationLevelLabel at: 1 @ 3;
+						add: #doughHydratationLevelInput at: 2 @ 3;
+						add: #saltRateLabel at: 1 @ 4;
+						add: #saltRateInput at: 2 @ 4;
+						add: #sourdoughHydrationLevelLabel at: 1 @ 5;
+						add: #sourdoughHydrationLevelInput at: 2 @ 5;
+						add: #sourdoughFlourRateLabel at: 1 @ 6;
+						add: #sourdoughFlourRateInput at: 2 @ 6;
+						yourself);
+				add:
+					(SpGridLayout new beColumnNotHomogeneous; beRowHomogeneous; 
+						add: #addedQuantityLabel at: 1 @ 1 span: 2 @ 1;
+						add: #pouringWaterLabel at: 1 @ 2;
+						add: #pouringWaterInput at: 2 @ 2;
+						add: #sourdoughLabel at: 1 @ 3;
+						add: #sourdoughInput at: 2 @ 3;
+						add: #saltOnPouringWaterLabel at: 1 @ 4;
+						add: #saltOnPouringWaterInput at: 2 @ 4;
+						add: #saltOnTotalWaterLabel at: 1 @ 5;
+						add: #saltOnTotalWaterInput at: 2 @ 5;
+						add: #totalDoughWeightLabel at: 1 @ 6;
+						add: #totalDoughWeightInput at: 2 @ 6;
+						yourself);
 				yourself);
+		add:
+			(SpGridLayout new beRowHomogeneous
+				add: #informationLabel at: 1 @ 1 span: 2 @ 1;
+				add: #apparentHydrationLevelLabel at: 1 @ 2;
+				add: #apparentHydrationLevelInput at: 2 @ 2;
+				add: #totalWaterWeightLabel at: 1 @ 3;
+				add: #totalWaterWeightInput at: 2 @ 3;
+				add: #totalFlourLabel at: 1 @ 4;
+				add: #totalFlourInput at: 2 @ 4;
+				add: #sourdoughWaterLabel at: 1 @ 5;
+				add: #sourdoughWaterInput at: 2 @ 5;
+				add: #sourdoughFlourLabel at: 1 @ 6;
+				add: #sourdoughFlourInput at: 2 @ 6;
+				yourself)
+			expand: true;
 		yourself
 ]
 
@@ -353,7 +353,8 @@ SourdoughUi >> quantityWishedWidgets [
 		autoAccept: true;
 		placeholder: '500'.
 	doughHydratationLevelLabel := self newLabel
-		label: 'desired hydration level for the dough (%)'.
+		label: 'desired hydration level';
+		help: 'for the dough (%)'.
 	doughHydratationLevelInput := self newTextInput
 		autoAccept: true;
 		placeholder: '60'.
@@ -364,7 +365,8 @@ SourdoughUi >> quantityWishedWidgets [
 		autoAccept: true;
 		placeholder: '3'.
 	sourdoughHydrationLevelLabel := self newLabel
-		label: 'hydration level of your sourdough (%)'.
+		label: 'hydration level';
+		help: 'of your sourdough (%)'.
 	sourdoughHydrationLevelInput := self newTextInput
 		autoAccept: true;
 		placeholder: '60'.
