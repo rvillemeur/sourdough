@@ -13,12 +13,13 @@ SourdoughConfiguration >> styleSheet [
 		fromString:
 			'
 .application [
-	Font { #name: "Source Sans Pro", #size: 10 },
+	Font { #name: "Times", #size: 8, #italic: false, #bold: false },
 	Geometry { #height: 25 },
 	.label [
+		Geometry { #hResizing: true },
 		.section [ 
 			Draw { #color: #blue},
-			Font {  #name: "Courrier new", #size: 14, #italic: true, #bold: true } ]
+			Font {  #name: "Verdana", #size: 11, #italic: true, #bold: true } ]
 	]
 ]
 '
