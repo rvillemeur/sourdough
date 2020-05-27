@@ -2,7 +2,7 @@
 SourdoughUi open
 "
 Class {
-	#name : #SourdoughUi,
+	#name : #SourdoughPresenter,
 	#superclass : #SpPresenterWithModel,
 	#instVars : [
 		'requiredQuantityLabel',
@@ -43,7 +43,7 @@ Class {
 }
 
 { #category : #specs }
-SourdoughUi class >> defaultSpec [
+SourdoughPresenter class >> defaultSpec [
 	^ SpBoxLayout newVertical
 		add:
 			(SpBoxLayout newHorizontal
@@ -96,62 +96,44 @@ SourdoughUi class >> defaultSpec [
 		yourself
 ]
 
-{ #category : #'class initialization' }
-SourdoughUi class >> initialize [
-	WorldState desktopMenuPragmaKeyword: 'worldMenu'.
-]
-
 { #category : #examples }
-SourdoughUi class >> open [
+SourdoughPresenter class >> open [
 	<example>
 	^ self new openWithSpec 
 ]
 
-{ #category : #'class initialization' }
-SourdoughUi class >> worldMenu: aBuilder [
-	<worldMenu>
-	(aBuilder item: #Sourdough)
-		order: 4.0;
-		with: [ (aBuilder item: 'calculate')
-				action: [ SourdoughUi  open ];
-				parent: #Sourdough;
-				icon: ThemeIcons current glamorousTable;
-				order: 0;
-				help: 'Launch sourdough UI'. ]
-]
-
 { #category : #accessing }
-SourdoughUi >> addedQuantityLabel [
+SourdoughPresenter >> addedQuantityLabel [
 	^ addedQuantityLabel
 ]
 
 { #category : #accessing }
-SourdoughUi >> addedQuantityLabel: anObject [
+SourdoughPresenter >> addedQuantityLabel: anObject [
 	addedQuantityLabel := anObject
 ]
 
 { #category : #accessing }
-SourdoughUi >> apparentHydrationLevelInput [
+SourdoughPresenter >> apparentHydrationLevelInput [
 	^ apparentHydrationLevelInput
 ]
 
 { #category : #accessing }
-SourdoughUi >> apparentHydrationLevelInput: anObject [
+SourdoughPresenter >> apparentHydrationLevelInput: anObject [
 	apparentHydrationLevelInput := anObject
 ]
 
 { #category : #accessing }
-SourdoughUi >> apparentHydrationLevelLabel [
+SourdoughPresenter >> apparentHydrationLevelLabel [
 	^ apparentHydrationLevelLabel
 ]
 
 { #category : #accessing }
-SourdoughUi >> apparentHydrationLevelLabel: anObject [
+SourdoughPresenter >> apparentHydrationLevelLabel: anObject [
 	apparentHydrationLevelLabel := anObject
 ]
 
 { #category : #initialization }
-SourdoughUi >> connectPresenters [
+SourdoughPresenter >> connectPresenters [
 	self flourInput
 		whenTextChangedDo: [ self model flour: self flourInput text asInteger.
 			self announcingObject valueChanged ].
@@ -173,27 +155,27 @@ SourdoughUi >> connectPresenters [
 ]
 
 { #category : #accessing }
-SourdoughUi >> doughHydratationLevelInput [
+SourdoughPresenter >> doughHydratationLevelInput [
 	^ doughHydratationLevelInput
 ]
 
 { #category : #accessing }
-SourdoughUi >> doughHydratationLevelInput: anObject [
+SourdoughPresenter >> doughHydratationLevelInput: anObject [
 	doughHydratationLevelInput := anObject
 ]
 
 { #category : #accessing }
-SourdoughUi >> doughHydratationLevelLabel [
+SourdoughPresenter >> doughHydratationLevelLabel [
 	^ doughHydratationLevelLabel
 ]
 
 { #category : #accessing }
-SourdoughUi >> doughHydratationLevelLabel: anObject [
+SourdoughPresenter >> doughHydratationLevelLabel: anObject [
 	doughHydratationLevelLabel := anObject
 ]
 
 { #category : #'model updates' }
-SourdoughUi >> fillFormWithWorkingModel [
+SourdoughPresenter >> fillFormWithWorkingModel [
 	self apparentHydrationLevelInput
 		text: (self model apparentHydrationLevel * 100) printString.
 	self pouringWaterInput text: self model pouringWater printString.
@@ -212,37 +194,37 @@ SourdoughUi >> fillFormWithWorkingModel [
 ]
 
 { #category : #accessing }
-SourdoughUi >> flourInput [
+SourdoughPresenter >> flourInput [
 	^ flourInput
 ]
 
 { #category : #accessing }
-SourdoughUi >> flourInput: anObject [
+SourdoughPresenter >> flourInput: anObject [
 	flourInput := anObject
 ]
 
 { #category : #accessing }
-SourdoughUi >> flourLabel [
+SourdoughPresenter >> flourLabel [
 	^ flourLabel
 ]
 
 { #category : #accessing }
-SourdoughUi >> flourLabel: anObject [
+SourdoughPresenter >> flourLabel: anObject [
 	flourLabel := anObject
 ]
 
 { #category : #accessing }
-SourdoughUi >> informationLabel [
+SourdoughPresenter >> informationLabel [
 	^ informationLabel
 ]
 
 { #category : #accessing }
-SourdoughUi >> informationLabel: anObject [
+SourdoughPresenter >> informationLabel: anObject [
 	informationLabel := anObject
 ]
 
 { #category : #widgets }
-SourdoughUi >> informationWidgets [
+SourdoughPresenter >> informationWidgets [
 	
 	sourdoughFlourLabel := self newLabel label: 'flour in sourdough'.
 	sourdoughFlourInput := self newTextInput enabled: false.
@@ -261,7 +243,7 @@ SourdoughUi >> informationWidgets [
 ]
 
 { #category : #initialization }
-SourdoughUi >> initialize [
+SourdoughPresenter >> initialize [
 	self
 		model:
 			(SourdoughModel
@@ -274,11 +256,10 @@ SourdoughUi >> initialize [
 ]
 
 { #category : #initialization }
-SourdoughUi >> initializePresenters [
-
-	requiredQuantityLabel := self newLabel label: 'quantity required (in grams)'; emphasis: #bold.
-	addedQuantityLabel := self newLabel label: 'quantity to be added (in grams)'; emphasis: #bold.
-	informationLabel := self newLabel label: 'additional information'; emphasis: #bold.
+SourdoughPresenter >> initializePresenters [
+	requiredQuantityLabel := self newLabel label: 'quantity required (in grams)'; addStyle: 'section'.
+	addedQuantityLabel := self newLabel label: 'quantity to be added (in grams)'; addStyle: 'section'.
+	informationLabel := self newLabel label: 'additional information'; addStyle: 'section'.
 	
 	self quantityWishedWidgets.
 	self quantityAddedWidgets.
@@ -293,7 +274,7 @@ SourdoughUi >> initializePresenters [
 ]
 
 { #category : #initialization }
-SourdoughUi >> initializeWindow: aWindowPresenter [
+SourdoughPresenter >> initializeWindow: aWindowPresenter [
 	aWindowPresenter
 		title: 'calculator for sourdough bread';
 		initialExtent: 600@390;
@@ -303,32 +284,37 @@ SourdoughUi >> initializeWindow: aWindowPresenter [
 ]
 
 { #category : #api }
-SourdoughUi >> modelChanged [
+SourdoughPresenter >> modelChanged [
 	self fillFormWithWorkingModel
 ]
 
+{ #category : #'instance creation' }
+SourdoughPresenter >> open [
+<script: 'self new openWithSpec'>
+]
+
 { #category : #accessing }
-SourdoughUi >> pouringWaterInput [
+SourdoughPresenter >> pouringWaterInput [
 	^ pouringWaterInput
 ]
 
 { #category : #accessing }
-SourdoughUi >> pouringWaterInput: anObject [
+SourdoughPresenter >> pouringWaterInput: anObject [
 	pouringWaterInput := anObject
 ]
 
 { #category : #accessing }
-SourdoughUi >> pouringWaterLabel [
+SourdoughPresenter >> pouringWaterLabel [
 	^ pouringWaterLabel
 ]
 
 { #category : #accessing }
-SourdoughUi >> pouringWaterLabel: anObject [
+SourdoughPresenter >> pouringWaterLabel: anObject [
 	pouringWaterLabel := anObject
 ]
 
 { #category : #widgets }
-SourdoughUi >> quantityAddedWidgets [
+SourdoughPresenter >> quantityAddedWidgets [
 	
 	pouringWaterLabel := self newLabel label: 'pouring water'.
 	pouringWaterInput := self newTextInput enabled: false.
@@ -347,7 +333,7 @@ SourdoughUi >> quantityAddedWidgets [
 ]
 
 { #category : #widgets }
-SourdoughUi >> quantityWishedWidgets [
+SourdoughPresenter >> quantityWishedWidgets [
 	flourLabel := self newLabel label: 'flour quantity'.
 	flourInput := self newTextInput
 		autoAccept: true;
@@ -379,231 +365,231 @@ SourdoughUi >> quantityWishedWidgets [
 ]
 
 { #category : #accessing }
-SourdoughUi >> requiredQuantityLabel [
+SourdoughPresenter >> requiredQuantityLabel [
 	^ requiredQuantityLabel
 ]
 
 { #category : #accessing }
-SourdoughUi >> requiredQuantityLabel: anObject [
+SourdoughPresenter >> requiredQuantityLabel: anObject [
 	requiredQuantityLabel := anObject
 ]
 
 { #category : #accessing }
-SourdoughUi >> saltOnPouringWaterInput [
+SourdoughPresenter >> saltOnPouringWaterInput [
 	^ saltOnPouringWaterInput
 ]
 
 { #category : #accessing }
-SourdoughUi >> saltOnPouringWaterInput: anObject [
+SourdoughPresenter >> saltOnPouringWaterInput: anObject [
 	saltOnPouringWaterInput := anObject
 ]
 
 { #category : #accessing }
-SourdoughUi >> saltOnPouringWaterLabel [
+SourdoughPresenter >> saltOnPouringWaterLabel [
 	^ saltOnPouringWaterLabel
 ]
 
 { #category : #accessing }
-SourdoughUi >> saltOnPouringWaterLabel: anObject [
+SourdoughPresenter >> saltOnPouringWaterLabel: anObject [
 	saltOnPouringWaterLabel := anObject
 ]
 
 { #category : #accessing }
-SourdoughUi >> saltOnTotalWaterInput [
+SourdoughPresenter >> saltOnTotalWaterInput [
 	^ saltOnTotalWaterInput
 ]
 
 { #category : #accessing }
-SourdoughUi >> saltOnTotalWaterInput: anObject [
+SourdoughPresenter >> saltOnTotalWaterInput: anObject [
 	saltOnTotalWaterInput := anObject
 ]
 
 { #category : #accessing }
-SourdoughUi >> saltOnTotalWaterLabel [
+SourdoughPresenter >> saltOnTotalWaterLabel [
 	^ saltOnTotalWaterLabel
 ]
 
 { #category : #accessing }
-SourdoughUi >> saltOnTotalWaterLabel: anObject [
+SourdoughPresenter >> saltOnTotalWaterLabel: anObject [
 	saltOnTotalWaterLabel := anObject
 ]
 
 { #category : #accessing }
-SourdoughUi >> saltRateInput [
+SourdoughPresenter >> saltRateInput [
 	^ saltRateInput
 ]
 
 { #category : #accessing }
-SourdoughUi >> saltRateInput: anObject [
+SourdoughPresenter >> saltRateInput: anObject [
 	saltRateInput := anObject
 ]
 
 { #category : #accessing }
-SourdoughUi >> saltRateLabel [
+SourdoughPresenter >> saltRateLabel [
 	^ saltRateLabel
 ]
 
 { #category : #accessing }
-SourdoughUi >> saltRateLabel: anObject [
+SourdoughPresenter >> saltRateLabel: anObject [
 	saltRateLabel := anObject
 ]
 
 { #category : #accessing }
-SourdoughUi >> sourdoughFlourInput [
+SourdoughPresenter >> sourdoughFlourInput [
 	^ sourdoughFlourInput
 ]
 
 { #category : #accessing }
-SourdoughUi >> sourdoughFlourInput: anObject [
+SourdoughPresenter >> sourdoughFlourInput: anObject [
 	sourdoughFlourInput := anObject
 ]
 
 { #category : #accessing }
-SourdoughUi >> sourdoughFlourLabel [
+SourdoughPresenter >> sourdoughFlourLabel [
 	^ sourdoughFlourLabel
 ]
 
 { #category : #accessing }
-SourdoughUi >> sourdoughFlourLabel: anObject [
+SourdoughPresenter >> sourdoughFlourLabel: anObject [
 	sourdoughFlourLabel := anObject
 ]
 
 { #category : #accessing }
-SourdoughUi >> sourdoughFlourRateInput [
+SourdoughPresenter >> sourdoughFlourRateInput [
 	^ sourdoughFlourRateInput
 ]
 
 { #category : #accessing }
-SourdoughUi >> sourdoughFlourRateInput: anObject [
+SourdoughPresenter >> sourdoughFlourRateInput: anObject [
 	sourdoughFlourRateInput := anObject
 ]
 
 { #category : #accessing }
-SourdoughUi >> sourdoughFlourRateLabel [
+SourdoughPresenter >> sourdoughFlourRateLabel [
 	^ sourdoughFlourRateLabel
 ]
 
 { #category : #accessing }
-SourdoughUi >> sourdoughFlourRateLabel: anObject [
+SourdoughPresenter >> sourdoughFlourRateLabel: anObject [
 	sourdoughFlourRateLabel := anObject
 ]
 
 { #category : #accessing }
-SourdoughUi >> sourdoughHydrationLevelInput [
+SourdoughPresenter >> sourdoughHydrationLevelInput [
 	^ sourdoughHydrationLevelInput
 ]
 
 { #category : #accessing }
-SourdoughUi >> sourdoughHydrationLevelInput: anObject [
+SourdoughPresenter >> sourdoughHydrationLevelInput: anObject [
 	sourdoughHydrationLevelInput := anObject
 ]
 
 { #category : #accessing }
-SourdoughUi >> sourdoughHydrationLevelLabel [
+SourdoughPresenter >> sourdoughHydrationLevelLabel [
 	^ sourdoughHydrationLevelLabel
 ]
 
 { #category : #accessing }
-SourdoughUi >> sourdoughHydrationLevelLabel: anObject [
+SourdoughPresenter >> sourdoughHydrationLevelLabel: anObject [
 	sourdoughHydrationLevelLabel := anObject
 ]
 
 { #category : #accessing }
-SourdoughUi >> sourdoughInput [
+SourdoughPresenter >> sourdoughInput [
 	^ sourdoughInput
 ]
 
 { #category : #accessing }
-SourdoughUi >> sourdoughInput: anObject [
+SourdoughPresenter >> sourdoughInput: anObject [
 	sourdoughInput := anObject
 ]
 
 { #category : #accessing }
-SourdoughUi >> sourdoughLabel [
+SourdoughPresenter >> sourdoughLabel [
 	^ sourdoughLabel
 ]
 
 { #category : #accessing }
-SourdoughUi >> sourdoughLabel: anObject [
+SourdoughPresenter >> sourdoughLabel: anObject [
 	sourdoughLabel := anObject
 ]
 
 { #category : #accessing }
-SourdoughUi >> sourdoughWaterInput [
+SourdoughPresenter >> sourdoughWaterInput [
 	^ sourdoughWaterInput
 ]
 
 { #category : #accessing }
-SourdoughUi >> sourdoughWaterInput: anObject [
+SourdoughPresenter >> sourdoughWaterInput: anObject [
 	sourdoughWaterInput := anObject
 ]
 
 { #category : #accessing }
-SourdoughUi >> sourdoughWaterLabel [
+SourdoughPresenter >> sourdoughWaterLabel [
 	^ sourdoughWaterLabel
 ]
 
 { #category : #accessing }
-SourdoughUi >> sourdoughWaterLabel: anObject [
+SourdoughPresenter >> sourdoughWaterLabel: anObject [
 	sourdoughWaterLabel := anObject
 ]
 
 { #category : #accessing }
-SourdoughUi >> totalDoughWeightInput [
+SourdoughPresenter >> totalDoughWeightInput [
 	^ totalDoughWeightInput
 ]
 
 { #category : #accessing }
-SourdoughUi >> totalDoughWeightInput: anObject [
+SourdoughPresenter >> totalDoughWeightInput: anObject [
 	totalDoughWeightInput := anObject
 ]
 
 { #category : #accessing }
-SourdoughUi >> totalDoughWeightLabel [
+SourdoughPresenter >> totalDoughWeightLabel [
 	^ totalDoughWeightLabel
 ]
 
 { #category : #accessing }
-SourdoughUi >> totalDoughWeightLabel: anObject [
+SourdoughPresenter >> totalDoughWeightLabel: anObject [
 	totalDoughWeightLabel := anObject
 ]
 
 { #category : #accessing }
-SourdoughUi >> totalFlourInput [
+SourdoughPresenter >> totalFlourInput [
 	^ totalFlourInput
 ]
 
 { #category : #accessing }
-SourdoughUi >> totalFlourInput: anObject [
+SourdoughPresenter >> totalFlourInput: anObject [
 	totalFlourInput := anObject
 ]
 
 { #category : #accessing }
-SourdoughUi >> totalFlourLabel [
+SourdoughPresenter >> totalFlourLabel [
 	^ totalFlourLabel
 ]
 
 { #category : #accessing }
-SourdoughUi >> totalFlourLabel: anObject [
+SourdoughPresenter >> totalFlourLabel: anObject [
 	totalFlourLabel := anObject
 ]
 
 { #category : #accessing }
-SourdoughUi >> totalWaterWeightInput [
+SourdoughPresenter >> totalWaterWeightInput [
 	^ totalWaterWeightInput
 ]
 
 { #category : #accessing }
-SourdoughUi >> totalWaterWeightInput: anObject [
+SourdoughPresenter >> totalWaterWeightInput: anObject [
 	totalWaterWeightInput := anObject
 ]
 
 { #category : #accessing }
-SourdoughUi >> totalWaterWeightLabel [
+SourdoughPresenter >> totalWaterWeightLabel [
 	^ totalWaterWeightLabel
 ]
 
 { #category : #accessing }
-SourdoughUi >> totalWaterWeightLabel: anObject [
+SourdoughPresenter >> totalWaterWeightLabel: anObject [
 	totalWaterWeightLabel := anObject
 ]
