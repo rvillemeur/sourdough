@@ -39,5 +39,6 @@ SourdoughApplication >> initialize [
 
 { #category : #initialization }
 SourdoughApplication >> start [
+<script: 'self start'>
 	^ (self new: SourdoughPresenter) openWithSpec
 ]
