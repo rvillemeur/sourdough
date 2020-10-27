@@ -17,7 +17,7 @@ SourdoughPresenter class >> defaultSpec [
 
 	^ SpBoxLayout
 		  newVertical
-		  add: (SpBoxLayout newHorizontal
+		  add: (SpBoxLayout newHorizontal 
 				   add: #wishedQuantity;
 				   add: #requiredQuantity;
 				   yourself);
@@ -78,6 +78,12 @@ SourdoughPresenter >> fillFormWithWorkingModel [
 		self model totalWaterWeight printString
 ]
 
+{ #category : #accessing }
+SourdoughPresenter >> height [
+
+	^ 390
+]
+
 { #category : #initialization }
 SourdoughPresenter >> initialize [
 	self
@@ -95,18 +101,16 @@ SourdoughPresenter >> initialize [
 SourdoughPresenter >> initializePresenters [
 
 	requiredQuantity := self instantiate:
-		                             SourdoughQuantityRequiredPresenter.
-	wishedQuantity := self instantiate:
-		                           SourdoughQuantityWishedPresenter.
-	information := self instantiate:
-		                        SourdoughInformationPresenter
+		                    SourdoughQuantityRequiredPresenter.
+	wishedQuantity := self instantiate: SourdoughQuantityWishedPresenter.
+	information := self instantiate: SourdoughInformationPresenter
 ]
 
 { #category : #initialization }
 SourdoughPresenter >> initializeWindow: aWindowPresenter [
 	aWindowPresenter
 		title: 'calculator for sourdough bread';
-		initialExtent: 600@390;
+		initialExtent: (self width)@(self height);
 		windowIcon: self windowIcon;
 		askOkToClose: false;
 		aboutText: 'Small tool to calculate proportion of sourdough'
@@ -120,4 +124,10 @@ SourdoughPresenter >> modelChanged [
 { #category : #'instance creation' }
 SourdoughPresenter >> open [
 <script: 'self new openWithSpec'>
+]
+
+{ #category : #accessing }
+SourdoughPresenter >> width [
+
+	^ 600
 ]
