@@ -5,9 +5,9 @@ Class {
 	#name : #SourdoughPresenter,
 	#superclass : #SpPresenterWithModel,
 	#instVars : [
-		'requiredQuantityPresenter',
-		'wishedQuantityPresenter',
-		'informationPresenter'
+		'requiredQuantity',
+		'wishedQuantity',
+		'information'
 	],
 	#category : #'Sourdough-UI'
 }
@@ -18,10 +18,10 @@ SourdoughPresenter class >> defaultSpec [
 	^ SpBoxLayout
 		  newVertical
 		  add: (SpBoxLayout newHorizontal
-				   add: #wishedQuantityPresenter;
-				   add: #requiredQuantityPresenter;
+				   add: #wishedQuantity;
+				   add: #requiredQuantity;
 				   yourself);
-		  add: #informationPresenter; yourself
+		  add: #information; yourself
 ]
 
 { #category : #examples }
@@ -32,49 +32,49 @@ SourdoughPresenter class >> open [
 
 { #category : #initialization }
 SourdoughPresenter >> connectPresenters [
-	wishedQuantityPresenter flourInput
-		whenTextChangedDo: [ self model flour: wishedQuantityPresenter flourInput text asInteger.
+	wishedQuantity flourInput
+		whenTextChangedDo: [ self model flour: wishedQuantity flourInput text asInteger.
 			self announcingObject valueChanged ].
-	wishedQuantityPresenter doughHydratationLevelInput
+	wishedQuantity doughHydratationLevelInput
 		whenTextChangedDo: [ self model
-				doughHydrationLevel: wishedQuantityPresenter doughHydratationLevelInput text asInteger percent.
+				doughHydrationLevel: wishedQuantity doughHydratationLevelInput text asInteger percent.
 			self announcingObject valueChanged ].
-	wishedQuantityPresenter saltRateInput
-		whenTextChangedDo: [ self model saltRate: wishedQuantityPresenter saltRateInput text asInteger percent.
+	wishedQuantity saltRateInput
+		whenTextChangedDo: [ self model saltRate: wishedQuantity saltRateInput text asInteger percent.
 			self announcingObject valueChanged ].
-	wishedQuantityPresenter sourdoughHydrationLevelInput
+	wishedQuantity sourdoughHydrationLevelInput
 		whenTextChangedDo: [ self model
-				sourdoughHydrationLevel: wishedQuantityPresenter sourdoughHydrationLevelInput text asInteger percent.
+				sourdoughHydrationLevel: wishedQuantity sourdoughHydrationLevelInput text asInteger percent.
 			self announcingObject valueChanged ].
-	wishedQuantityPresenter sourdoughFlourRateInput
+	wishedQuantity sourdoughFlourRateInput
 		whenTextChangedDo: [ self model
-				sourdoughFlourRate: wishedQuantityPresenter sourdoughFlourRateInput text asInteger percent.
+				sourdoughFlourRate: wishedQuantity sourdoughFlourRateInput text asInteger percent.
 			self announcingObject valueChanged ]
 ]
 
 { #category : #'model updates' }
 SourdoughPresenter >> fillFormWithWorkingModel [
 
-	requiredQuantityPresenter totalDoughWeightInput text:
+	requiredQuantity totalDoughWeightInput text:
 		self model totalDoughWeight printString.
-	requiredQuantityPresenter pouringWaterInput text:
+	requiredQuantity pouringWaterInput text:
 		self model pouringWater printString.
-	requiredQuantityPresenter saltOnPouringWaterInput text:
+	requiredQuantity saltOnPouringWaterInput text:
 		self model saltOnPouringWater printString.
-	requiredQuantityPresenter saltOnTotalWaterInput text:
+	requiredQuantity saltOnTotalWaterInput text:
 		self model saltOnTotalWater printString.
-	requiredQuantityPresenter sourdoughInput text:
+	requiredQuantity sourdoughInput text:
 		self model sourdough printString.
 
-	informationPresenter apparentHydrationLevelInput text:
+	information apparentHydrationLevelInput text:
 		(self model apparentHydrationLevel * 100) printString.
-	informationPresenter sourdoughFlourInput text:
+	information sourdoughFlourInput text:
 		self model sourdoughFlour printString.
-	informationPresenter sourdoughWaterInput text:
+	information sourdoughWaterInput text:
 		self model sourdoughWater printString.
-	informationPresenter totalFlourInput text:
+	information totalFlourInput text:
 		self model totalFlour printString.
-	informationPresenter totalWaterWeightInput text:
+	information totalWaterWeightInput text:
 		self model totalWaterWeight printString
 ]
 
@@ -94,11 +94,11 @@ SourdoughPresenter >> initialize [
 { #category : #initialization }
 SourdoughPresenter >> initializePresenters [
 
-	requiredQuantityPresenter := self instantiate:
+	requiredQuantity := self instantiate:
 		                             SourdoughQuantityRequiredPresenter.
-	wishedQuantityPresenter := self instantiate:
+	wishedQuantity := self instantiate:
 		                           SourdoughQuantityWishedPresenter.
-	informationPresenter := self instantiate:
+	information := self instantiate:
 		                        SourdoughInformationPresenter
 ]
 
