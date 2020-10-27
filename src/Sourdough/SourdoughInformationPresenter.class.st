@@ -17,12 +17,6 @@ Class {
 	#category : #'Sourdough-UI'
 }
 
-{ #category : #examples }
-SourdoughInformationPresenter class >> open [
-	<example>
-	^ self new openWithSpec 
-]
-
 { #category : #accessing }
 SourdoughInformationPresenter >> apparentHydrationLevelInput [
 	^ apparentHydrationLevelInput
@@ -72,7 +66,12 @@ SourdoughInformationPresenter >> initializePresenters [
 	totalWaterWeightLabel := self newLabel label: 'total amount of water in the dough'.
 	totalWaterWeightInput := self newTextInput enabled: false.
 
-	self layout: (SpGridLayout new beRowHomogeneous
+	self layout: self layout.
+]
+
+{ #category : #accessing }
+SourdoughInformationPresenter >> layout [ 
+^SpGridLayout new beRowHomogeneous
 		  add: #informationLabel at: 1 @ 1 span: 2 @ 1;
 		  add: #apparentHydrationLevelLabel at: 1 @ 2;
 		  add: #apparentHydrationLevelInput at: 2 @ 2;
@@ -84,7 +83,7 @@ SourdoughInformationPresenter >> initializePresenters [
 		  add: #sourdoughWaterInput at: 2 @ 5;
 		  add: #sourdoughFlourLabel at: 1 @ 6;
 		  add: #sourdoughFlourInput at: 2 @ 6;
-		  yourself)
+		  yourself
 ]
 
 { #category : #'instance creation' }

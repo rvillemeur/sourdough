@@ -18,8 +18,8 @@ SourdoughConfiguration >> styleSheet [
 	.label [
 		Geometry { #hResizing: true },
 		.section [ 
-			Draw { #color: #blue},
-			Font {  #name: "Verdana", #size: 11, #italic: true, #bold: true } ]
+			Draw { #color: #blue, #backgroundColor: #red},
+			Font {  #name: "Verdana", #size: 11, #italic: true, #bold: true}]
 	]
 ]
 '

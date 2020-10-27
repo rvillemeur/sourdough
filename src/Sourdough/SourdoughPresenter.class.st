@@ -12,24 +12,6 @@ Class {
 	#category : #'Sourdough-UI'
 }
 
-{ #category : #specs }
-SourdoughPresenter class >> defaultSpec [
-
-	^ SpBoxLayout
-		  newVertical
-		  add: (SpBoxLayout newHorizontal 
-				   add: #wishedQuantity;
-				   add: #requiredQuantity;
-				   yourself);
-		  add: #information; yourself
-]
-
-{ #category : #examples }
-SourdoughPresenter class >> open [
-	<example>
-	^ self new openWithSpec 
-]
-
 { #category : #initialization }
 SourdoughPresenter >> connectPresenters [
 	wishedQuantity flourInput
@@ -103,7 +85,8 @@ SourdoughPresenter >> initializePresenters [
 	requiredQuantity := self instantiate:
 		                    SourdoughQuantityRequiredPresenter.
 	wishedQuantity := self instantiate: SourdoughQuantityWishedPresenter.
-	information := self instantiate: SourdoughInformationPresenter
+	information := self instantiate: SourdoughInformationPresenter.
+	self layout: self layout
 ]
 
 { #category : #initialization }
@@ -114,6 +97,18 @@ SourdoughPresenter >> initializeWindow: aWindowPresenter [
 		windowIcon: self windowIcon;
 		askOkToClose: false;
 		aboutText: 'Small tool to calculate proportion of sourdough'
+]
+
+{ #category : #accessing }
+SourdoughPresenter >> layout [
+
+	^ SpBoxLayout newVertical
+		  add: (SpBoxLayout newHorizontal
+				   add: #wishedQuantity;
+				   add: #requiredQuantity;
+				   yourself);
+		  add: #information;
+		  yourself
 ]
 
 { #category : #api }
