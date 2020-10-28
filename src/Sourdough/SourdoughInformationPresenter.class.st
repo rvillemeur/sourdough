@@ -71,18 +71,31 @@ SourdoughInformationPresenter >> initializePresenters [
 
 { #category : #accessing }
 SourdoughInformationPresenter >> layout [ 
-^SpGridLayout new beRowHomogeneous
-		  add: #informationLabel at: 1 @ 1 span: 2 @ 1;
-		  add: #apparentHydrationLevelLabel at: 1 @ 2;
-		  add: #apparentHydrationLevelInput at: 2 @ 2;
-		  add: #totalWaterWeightLabel at: 1 @ 3;
-		  add: #totalWaterWeightInput at: 2 @ 3;
-		  add: #totalFlourLabel at: 1 @ 4;
-		  add: #totalFlourInput at: 2 @ 4;
-		  add: #sourdoughWaterLabel at: 1 @ 5;
-		  add: #sourdoughWaterInput at: 2 @ 5;
-		  add: #sourdoughFlourLabel at: 1 @ 6;
-		  add: #sourdoughFlourInput at: 2 @ 6;
+^
+SpBoxLayout newVertical spacing: 5;
+		  add: (SpBoxLayout newHorizontal
+				   add: #informationLabel;
+				   yourself);
+		  add: (SpBoxLayout newHorizontal
+				   add: #apparentHydrationLevelLabel expand: true;
+				   add: #apparentHydrationLevelInput width: 50;
+				   yourself);
+		  add: (SpBoxLayout newHorizontal
+				   add: #totalWaterWeightLabel expand: true;
+				   add: #totalWaterWeightInput width: 50;
+				   yourself);
+		  add: (SpBoxLayout newHorizontal
+				   add: #totalFlourLabel expand: true;
+				   add: #totalFlourInput width: 50;
+				   yourself);
+		  add: (SpBoxLayout newHorizontal
+				   add: #sourdoughWaterLabel expand: true;
+				   add: #sourdoughWaterInput width: 50;
+				   yourself);
+		  add: (SpBoxLayout newHorizontal
+				   add: #sourdoughFlourLabel expand: true;
+				   add: #sourdoughFlourInput width: 50;
+				   yourself);
 		  yourself
 ]
 

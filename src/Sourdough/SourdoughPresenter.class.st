@@ -106,8 +106,8 @@ SourdoughPresenter >> layout [
 		  add: (SpBoxLayout newHorizontal
 				   add: #wishedQuantity;
 				   add: #requiredQuantity;
-				   yourself);
-		  add: #information;
+				   yourself)  expand: true;
+		  add: #information expand: true;
 		  yourself
 ]
 

@@ -17,29 +17,6 @@ Class {
 	#category : #'Sourdough-UI'
 }
 
-{ #category : #specs }
-SourdoughQuantityRequiredPresenter class >> defaultSpec [
-	^ SpGridLayout new beColumnNotHomogeneous; beRowHomogeneous; 
-						add: #addedQuantityLabel at: 1 @ 1 span: 2 @ 1;
-						add: #pouringWaterLabel at: 1 @ 2;
-						add: #pouringWaterInput at: 2 @ 2;
-						add: #sourdoughLabel at: 1 @ 3;
-						add: #sourdoughInput at: 2 @ 3;
-						add: #saltOnPouringWaterLabel at: 1 @ 4;
-						add: #saltOnPouringWaterInput at: 2 @ 4;
-						add: #saltOnTotalWaterLabel at: 1 @ 5;
-						add: #saltOnTotalWaterInput at: 2 @ 5;
-						add: #totalDoughWeightLabel at: 1 @ 6;
-						add: #totalDoughWeightInput at: 2 @ 6;
-		yourself
-]
-
-{ #category : #examples }
-SourdoughQuantityRequiredPresenter class >> open [
-	<example>
-	^ self new openWithSpec 
-]
-
 { #category : #accessing }
 SourdoughQuantityRequiredPresenter >> addedQuantityLabel [
 	^ addedQuantityLabel
@@ -68,7 +45,44 @@ SourdoughQuantityRequiredPresenter >> initializePresenters [
 	
 	totalDoughWeightLabel := self newLabel label: 'total weight of the dough'; help: '(without salt)'.
 	totalDoughWeightInput := self newTextInput enabled: false.
+	
+	self layout: self layout.
 
+]
+
+{ #category : #private }
+SourdoughQuantityRequiredPresenter >> layout [
+	^ SpBoxLayout newVertical
+		  add: (SpBoxLayout newHorizontal
+				   add: #addedQuantityLabel;
+				   yourself)
+		  height: 25;
+		  add: (SpBoxLayout newHorizontal
+				   add: #pouringWaterLabel expand: true;
+				   add: #pouringWaterInput width: 50;
+				   yourself)
+		  height: 25;
+		  add: (SpBoxLayout newHorizontal
+				   add: #sourdoughLabel expand: true;
+				   add: #sourdoughInput width: 50;
+				   yourself)
+		  height: 25;
+		  add: (SpBoxLayout newHorizontal
+				   add: #saltOnPouringWaterLabel expand: true;
+				   add: #saltOnPouringWaterInput width: 50;
+				   yourself)
+		  height: 25;
+		  add: (SpBoxLayout newHorizontal
+				   add: #saltOnTotalWaterLabel expand: true;
+				   add: #saltOnTotalWaterInput width: 50;
+				   yourself)
+		  height: 25;
+		  add: (SpBoxLayout newHorizontal
+				   add: #totalDoughWeightLabel expand: true;
+				   add: #totalDoughWeightInput width: 50;
+				   yourself)
+		  height: 25;
+		  yourself
 ]
 
 { #category : #'instance creation' }
