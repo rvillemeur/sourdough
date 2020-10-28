@@ -13,16 +13,16 @@ SourdoughConfiguration >> styleSheet [
 		fromString:
 			'
 .application [
-	Font { #name: "Times", #size: 8, #italic: false, #bold: false },
-	Geometry { #height: 25 },
-	Draw { #color: #black, #backgroundColor: #lightBlue},
+	.textInputField [ Draw { #color: #white} ],
 	.label [
-		Geometry { #hResizing: true, #height: 40 },
+		Font {  #name: "Verdana", #size: 10, #italic: false, #bold: true}],
+		Draw { #color: #blue},
 		.section [ 
-			Draw { #color: #blue, #backgroundColor: #red},
-			Font {  #name: "Verdana", #size: 11, #italic: true, #bold: true},
-			Geometry { #hResizing: true, #height: 40 }]
+			Draw { #color: #veryDarkGray, #backgroundColor: #lightGray},
+			Font {  #name: "Verdana", #size: 12, #italic: true, #bold: true}],
+		.disabled [ Draw { #color: #veryLightGray} ]
 	]
+
 ]
 '
 ]
