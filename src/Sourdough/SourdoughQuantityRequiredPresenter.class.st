@@ -29,59 +29,71 @@ SourdoughQuantityRequiredPresenter >> addedQuantityLabel: anObject [
 
 { #category : #initialization }
 SourdoughQuantityRequiredPresenter >> initializePresenters [
-	addedQuantityLabel := self newLabel label: 'quantity to be added (in grams)'; addStyle: 'section'.
-	
-	pouringWaterLabel := self newLabel label: 'pouring water'.
-	pouringWaterInput := self newTextInput enabled: false.
-	
-	sourdoughLabel := self newLabel label: 'sourdough'.
-	sourdoughInput := self newTextInput enabled: false.
-	
-	saltOnPouringWaterLabel := self newLabel label: 'Minimum quantity of salt'; help: '(on casting water)'.
-	saltOnPouringWaterInput := self newTextInput enabled: false.
-	
-	saltOnTotalWaterLabel := self newLabel label: 'Minimum quantity of salt'; help:  '(on total water)'.
-	saltOnTotalWaterInput := self newTextInput enabled: false.
-	
-	totalDoughWeightLabel := self newLabel label: 'total weight of the dough'; help: '(without salt)'.
-	totalDoughWeightInput := self newTextInput enabled: false.
-	
-	self layout: self layout.
 
+	addedQuantityLabel := self newLabel
+		                      label: 'quantity to be added (in grams)';
+		                      addStyle: 'section'.
+
+	pouringWaterLabel := self newLabel label: 'pouring water'.
+	pouringWaterInput := self newTextInput
+		                     enabled: false;
+		                     addStyle: 'disabled'.
+
+	sourdoughLabel := self newLabel label: 'sourdough'.
+	sourdoughInput := self newTextInput
+		                  enabled: false;
+		                  addStyle: 'disabled'.
+
+	saltOnPouringWaterLabel := self newLabel
+		                           label: 'Minimum quantity of salt';
+		                           help: '(on casting water)'.
+	saltOnPouringWaterInput := self newTextInput
+		                           enabled: false;
+		                           addStyle: 'disabled'.
+
+	saltOnTotalWaterLabel := self newLabel
+		                         label: 'Minimum quantity of salt';
+		                         help: '(on total water)'.
+	saltOnTotalWaterInput := self newTextInput
+		                         enabled: false;
+		                         addStyle: 'disabled'.
+
+	totalDoughWeightLabel := self newLabel
+		                         label: 'total weight of the dough';
+		                         help: '(without salt)'.
+	totalDoughWeightInput := self newTextInput
+		                         enabled: false;
+		                         addStyle: 'disabled'.
+
+	self layout: self layout
 ]
 
 { #category : #private }
 SourdoughQuantityRequiredPresenter >> layout [
-	^ SpBoxLayout newVertical
+	^ SpBoxLayout newVertical spacing: 2;
 		  add: (SpBoxLayout newHorizontal
 				   add: #addedQuantityLabel;
-				   yourself)
-		  height: 25;
+				   yourself);
 		  add: (SpBoxLayout newHorizontal
 				   add: #pouringWaterLabel expand: true;
 				   add: #pouringWaterInput width: 50;
-				   yourself)
-		  height: 25;
+				   yourself);
 		  add: (SpBoxLayout newHorizontal
 				   add: #sourdoughLabel expand: true;
 				   add: #sourdoughInput width: 50;
-				   yourself)
-		  height: 25;
+				   yourself);
 		  add: (SpBoxLayout newHorizontal
 				   add: #saltOnPouringWaterLabel expand: true;
 				   add: #saltOnPouringWaterInput width: 50;
-				   yourself)
-		  height: 25;
+				   yourself);
 		  add: (SpBoxLayout newHorizontal
 				   add: #saltOnTotalWaterLabel expand: true;
 				   add: #saltOnTotalWaterInput width: 50;
-				   yourself)
-		  height: 25;
+				   yourself);
 		  add: (SpBoxLayout newHorizontal
 				   add: #totalDoughWeightLabel expand: true;
 				   add: #totalDoughWeightInput width: 50;
-				   yourself)
-		  height: 25;
+				   yourself);
 		  yourself
 ]
 

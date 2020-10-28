@@ -49,30 +49,46 @@ SourdoughInformationPresenter >> informationLabel: anObject [
 
 { #category : #initialization }
 SourdoughInformationPresenter >> initializePresenters [
-	informationLabel := self newLabel label: 'additional information'; addStyle: 'section'.
-	
-	sourdoughFlourLabel := self newLabel label: 'flour in sourdough'.
-	sourdoughFlourInput := self newTextInput enabled: false.
-	
-	sourdoughWaterLabel := self newLabel label: 'water in sourdough'.
-	sourdoughWaterInput := self newTextInput enabled: false.
-	
-	apparentHydrationLevelLabel := self newLabel label: 'apparent dough hydration rate'.
-	apparentHydrationLevelInput := self newTextInput enabled: false.
-	
-	totalFlourLabel := self newLabel label: 'total amount of flour in the dough'.
-	totalFlourInput := self newTextInput enabled: false.
-	
-	totalWaterWeightLabel := self newLabel label: 'total amount of water in the dough'.
-	totalWaterWeightInput := self newTextInput enabled: false.
 
-	self layout: self layout.
+	informationLabel := self newLabel
+		                    label: 'additional information';
+		                    addStyle: 'section'.
+
+	sourdoughFlourLabel := self newLabel label: 'flour in sourdough'.
+	sourdoughFlourInput := self newTextInput
+		                       enabled: false;
+		                       addStyle: 'disabled'.
+
+	sourdoughWaterLabel := self newLabel label: 'water in sourdough'.
+	sourdoughWaterInput := self newTextInput
+		                       enabled: false;
+		                       addStyle: 'disabled'.
+
+	apparentHydrationLevelLabel := self newLabel label:
+		                               'apparent dough hydration rate'.
+	apparentHydrationLevelInput := self newTextInput
+		                               enabled: false;
+		                               addStyle: 'disabled'.
+
+	totalFlourLabel := self newLabel label:
+		                   'total amount of flour in the dough'.
+	totalFlourInput := self newTextInput
+		                   enabled: false;
+		                   addStyle: 'disabled'.
+
+	totalWaterWeightLabel := self newLabel label:
+		                         'total amount of water in the dough'.
+	totalWaterWeightInput := self newTextInput
+		                         enabled: false;
+		                         addStyle: 'disabled'.
+
+	self layout: self layout
 ]
 
 { #category : #accessing }
 SourdoughInformationPresenter >> layout [ 
 ^
-SpBoxLayout newVertical spacing: 5;
+SpBoxLayout newVertical spacing: 2;
 		  add: (SpBoxLayout newHorizontal
 				   add: #informationLabel;
 				   yourself);

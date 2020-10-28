@@ -103,7 +103,7 @@ SourdoughPresenter >> initializeWindow: aWindowPresenter [
 SourdoughPresenter >> layout [
 
 	^ SpBoxLayout newVertical
-		  add: (SpBoxLayout newHorizontal
+		  add: (SpBoxLayout newHorizontal spacing: 5;
 				   add: #wishedQuantity;
 				   add: #requiredQuantity;
 				   yourself)  expand: true;

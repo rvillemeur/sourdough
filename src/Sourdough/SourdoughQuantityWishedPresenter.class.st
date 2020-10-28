@@ -59,36 +59,40 @@ SourdoughQuantityWishedPresenter >> flourLabel: anObject [
 
 { #category : #initialization }
 SourdoughQuantityWishedPresenter >> initializePresenters [
-	requiredQuantityLabel := self newLabel label: 'quantity required (in grams)'; addStyle: 'section'.
+
+	requiredQuantityLabel := self newLabel
+		                         label: 'quantity required (in grams)';
+		                         addStyle: 'section'.
 
 	flourLabel := self newLabel label: 'flour quantity'.
 	flourInput := self newTextInput
-		autoAccept: true;
-		placeholder: '500'.
+		              autoAccept: true;
+		              placeholder: '500'.
 	doughHydratationLevelLabel := self newLabel
-		label: 'desired hydration level';
-		help: 'for the dough (%)'.
+		                              label: 'desired hydration level';
+		                              help: 'for the dough (%)'.
 	doughHydratationLevelInput := self newTextInput
-		autoAccept: true;
-		placeholder: '60'.
+		                              autoAccept: true;
+		                              placeholder: '60'.
 	saltRateLabel := self newLabel
-		label: 'proportion of salt';
-		help: '(between 2 and 3.5% of the weight of the casting water)'.
+		                 label: 'proportion of salt';
+		                 help:
+			                 '(between 2 and 3.5% of the weight of the casting water)'.
 	saltRateInput := self newTextInput
-		autoAccept: true;
-		placeholder: '3'.
+		                 autoAccept: true;
+		                 placeholder: '3'.
 	sourdoughHydrationLevelLabel := self newLabel
-		label: 'hydration level';
-		help: 'of your sourdough (%)'.
+		                                label: 'hydration level';
+		                                help: 'of your sourdough (%)'.
 	sourdoughHydrationLevelInput := self newTextInput
-		autoAccept: true;
-		placeholder: '60'.
+		                                autoAccept: true;
+		                                placeholder: '60'.
 	sourdoughFlourRateLabel := self newLabel
-		label: 'Proportion of sourdough';
-		help: '(in % of flour weight)'.
+		                           label: 'Proportion of sourdough';
+		                           help: '(in % of flour weight)'.
 	sourdoughFlourRateInput := self newTextInput
-		autoAccept: true;
-		placeholder: '50'.
+		                           autoAccept: true;
+		                           placeholder: '50'.
 
 	self focusOrder
 		add: flourInput;
@@ -96,45 +100,37 @@ SourdoughQuantityWishedPresenter >> initializePresenters [
 		add: saltRateInput;
 		add: sourdoughHydrationLevelInput;
 		add: sourdoughFlourRateInput.
-		
-	self layout: self layout.
-		
 
+	self layout: self layout
 ]
 
 { #category : #accessing }
 SourdoughQuantityWishedPresenter >> layout [
 
-	^ SpBoxLayout newVertical
+	^ SpBoxLayout newVertical spacing: 2;
 		  add: (SpBoxLayout newHorizontal
 				   add: #requiredQuantityLabel;
-				   yourself)
-		  height: 25;
+				   yourself);
 		  add: (SpBoxLayout newHorizontal
 				   add: #flourLabel expand: true;
 				   add: #flourInput width: 50;
-				   yourself)
-		  height: 25;
+				   yourself);
 		  add: (SpBoxLayout newHorizontal
 				   add: #doughHydratationLevelLabel expand: true;
 				   add: #doughHydratationLevelInput width: 50;
-				   yourself)
-		  height: 25;
+				   yourself);
 		  add: (SpBoxLayout newHorizontal
 				   add: #saltRateLabel expand: true;
 				   add: #saltRateInput width: 50;
-				   yourself)
-		  height: 25;
+				   yourself);
 		  add: (SpBoxLayout newHorizontal
 				   add: #sourdoughHydrationLevelLabel expand: true;
 				   add: #sourdoughHydrationLevelInput width: 50;
-				   yourself)
-		  height: 25;
+				   yourself);
 		  add: (SpBoxLayout newHorizontal
 				   add: #sourdoughFlourRateLabel expand: true;
 				   add: #sourdoughFlourRateInput width: 50;
-				   yourself)
-		  height: 25;
+				   yourself);
 		  yourself
 ]
 
