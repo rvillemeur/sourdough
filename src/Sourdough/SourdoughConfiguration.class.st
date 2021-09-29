@@ -13,12 +13,12 @@ SourdoughConfiguration >> styleSheet [
 		fromString:
 			'
 .application [
-	.textInputField [ Draw { #color: #white} ],
+	.textInputField [ Draw { #color: #blue} ],
 	.label [
 		Font {  #name: "Verdana", #size: 10, #italic: false, #bold: true}],
-		Draw { #color: #blue},
+		Draw { #color: #darkGray, #backgroundColor: #lightGray},
 		.section [ 
-			Draw { #color: #veryDarkGray, #backgroundColor: #lightGray},
+			Draw { #color: #blue, #backgroundColor: #lightGray},
 			Font {  #name: "Verdana", #size: 12, #italic: true, #bold: true}],
 		.disabled [ Draw { #color: #veryLightGray} ]
 	]
