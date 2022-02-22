@@ -37,6 +37,36 @@ SourdoughInformationPresenter >> apparentHydrationLevelLabel: anObject [
 	apparentHydrationLevelLabel := anObject
 ]
 
+{ #category : #layout }
+SourdoughInformationPresenter >> defaultLayout [ 
+^
+SpBoxLayout newVertical spacing: 2;
+		  add: (SpBoxLayout newHorizontal
+				   add: informationLabel;
+				   yourself);
+		  add: (SpBoxLayout newHorizontal
+				   add: apparentHydrationLevelLabel expand: true;
+				   add: apparentHydrationLevelInput width: 50;
+				   yourself);
+		  add: (SpBoxLayout newHorizontal
+				   add: totalWaterWeightLabel expand: true;
+				   add: totalWaterWeightInput width: 50;
+				   yourself);
+		  add: (SpBoxLayout newHorizontal
+				   add: totalFlourLabel expand: true;
+				   add: totalFlourInput width: 50;
+				   yourself);
+		  add: (SpBoxLayout newHorizontal
+				   add: sourdoughWaterLabel expand: true;
+				   add: sourdoughWaterInput width: 50;
+				   yourself);
+		  add: (SpBoxLayout newHorizontal
+				   add: sourdoughFlourLabel expand: true;
+				   add: sourdoughFlourInput width: 50;
+				   yourself);
+		  yourself
+]
+
 { #category : #accessing }
 SourdoughInformationPresenter >> informationLabel [
 	^ informationLabel
@@ -86,41 +116,6 @@ SourdoughInformationPresenter >> initializePresenters [
 ]
 
 { #category : #accessing }
-SourdoughInformationPresenter >> layout [ 
-^
-SpBoxLayout newVertical spacing: 2;
-		  add: (SpBoxLayout newHorizontal
-				   add: #informationLabel;
-				   yourself);
-		  add: (SpBoxLayout newHorizontal
-				   add: #apparentHydrationLevelLabel expand: true;
-				   add: #apparentHydrationLevelInput width: 50;
-				   yourself);
-		  add: (SpBoxLayout newHorizontal
-				   add: #totalWaterWeightLabel expand: true;
-				   add: #totalWaterWeightInput width: 50;
-				   yourself);
-		  add: (SpBoxLayout newHorizontal
-				   add: #totalFlourLabel expand: true;
-				   add: #totalFlourInput width: 50;
-				   yourself);
-		  add: (SpBoxLayout newHorizontal
-				   add: #sourdoughWaterLabel expand: true;
-				   add: #sourdoughWaterInput width: 50;
-				   yourself);
-		  add: (SpBoxLayout newHorizontal
-				   add: #sourdoughFlourLabel expand: true;
-				   add: #sourdoughFlourInput width: 50;
-				   yourself);
-		  yourself
-]
-
-{ #category : #'instance creation' }
-SourdoughInformationPresenter >> open [
-<script: 'self new openWithSpec'>
-]
-
-{ #category : #accessing }
 SourdoughInformationPresenter >> sourdoughFlourInput [
 	^ sourdoughFlourInput
 ]
@@ -158,6 +153,13 @@ SourdoughInformationPresenter >> sourdoughWaterLabel [
 { #category : #accessing }
 SourdoughInformationPresenter >> sourdoughWaterLabel: anObject [
 	sourdoughWaterLabel := anObject
+]
+
+{ #category : #'instance creation' }
+SourdoughInformationPresenter >> start [
+
+	<script: 'self new open'>
+	
 ]
 
 { #category : #accessing }

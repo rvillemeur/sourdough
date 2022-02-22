@@ -37,8 +37,9 @@ SourdoughApplication >> initialize [
 	self useBackend: #Morphic with: SourdoughConfiguration new
 ]
 
-{ #category : #initialization }
+{ #category : #running }
 SourdoughApplication >> start [
-<script: 'self start'>
-	^ (self new: SourdoughPresenter) openWithSpec
+
+	<script: 'self start'>
+	^ (self new: SourdoughPresenter) open
 ]

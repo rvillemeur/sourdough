@@ -27,6 +27,35 @@ SourdoughQuantityRequiredPresenter >> addedQuantityLabel: anObject [
 	addedQuantityLabel := anObject
 ]
 
+{ #category : #layout }
+SourdoughQuantityRequiredPresenter >> defaultLayout [
+	^ SpBoxLayout newVertical spacing: 2;
+		  add: (SpBoxLayout newHorizontal
+				   add: addedQuantityLabel;
+				   yourself);
+		  add: (SpBoxLayout newHorizontal
+				   add: pouringWaterLabel expand: true;
+				   add: pouringWaterInput width: 50;
+				   yourself);
+		  add: (SpBoxLayout newHorizontal
+				   add: sourdoughLabel expand: true;
+				   add: sourdoughInput width: 50;
+				   yourself);
+		  add: (SpBoxLayout newHorizontal
+				   add: saltOnPouringWaterLabel expand: true;
+				   add: saltOnPouringWaterInput width: 50;
+				   yourself);
+		  add: (SpBoxLayout newHorizontal
+				   add: saltOnTotalWaterLabel expand: true;
+				   add: saltOnTotalWaterInput width: 50;
+				   yourself);
+		  add: (SpBoxLayout newHorizontal
+				   add: totalDoughWeightLabel expand: true;
+				   add: totalDoughWeightInput width: 50;
+				   yourself);
+		  yourself
+]
+
 { #category : #initialization }
 SourdoughQuantityRequiredPresenter >> initializePresenters [
 
@@ -66,40 +95,6 @@ SourdoughQuantityRequiredPresenter >> initializePresenters [
 		                         addStyle: 'disabled'.
 
 	self layout: self layout
-]
-
-{ #category : #private }
-SourdoughQuantityRequiredPresenter >> layout [
-	^ SpBoxLayout newVertical spacing: 2;
-		  add: (SpBoxLayout newHorizontal
-				   add: #addedQuantityLabel;
-				   yourself);
-		  add: (SpBoxLayout newHorizontal
-				   add: #pouringWaterLabel expand: true;
-				   add: #pouringWaterInput width: 50;
-				   yourself);
-		  add: (SpBoxLayout newHorizontal
-				   add: #sourdoughLabel expand: true;
-				   add: #sourdoughInput width: 50;
-				   yourself);
-		  add: (SpBoxLayout newHorizontal
-				   add: #saltOnPouringWaterLabel expand: true;
-				   add: #saltOnPouringWaterInput width: 50;
-				   yourself);
-		  add: (SpBoxLayout newHorizontal
-				   add: #saltOnTotalWaterLabel expand: true;
-				   add: #saltOnTotalWaterInput width: 50;
-				   yourself);
-		  add: (SpBoxLayout newHorizontal
-				   add: #totalDoughWeightLabel expand: true;
-				   add: #totalDoughWeightInput width: 50;
-				   yourself);
-		  yourself
-]
-
-{ #category : #'instance creation' }
-SourdoughQuantityRequiredPresenter >> open [
-<script: 'self new openWithSpec'>
 ]
 
 { #category : #accessing }
@@ -180,6 +175,13 @@ SourdoughQuantityRequiredPresenter >> sourdoughLabel [
 { #category : #accessing }
 SourdoughQuantityRequiredPresenter >> sourdoughLabel: anObject [
 	sourdoughLabel := anObject
+]
+
+{ #category : #'instance creation' }
+SourdoughQuantityRequiredPresenter >> start [
+
+	<script: 'self new open'>
+	
 ]
 
 { #category : #accessing }

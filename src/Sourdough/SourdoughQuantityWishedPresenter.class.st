@@ -17,6 +17,36 @@ Class {
 	#category : #'Sourdough-UI'
 }
 
+{ #category : #layout }
+SourdoughQuantityWishedPresenter >> defaultLayout [
+
+	^ SpBoxLayout newVertical spacing: 2;
+		  add: (SpBoxLayout newHorizontal
+				   add: requiredQuantityLabel;
+				   yourself);
+		  add: (SpBoxLayout newHorizontal
+				   add: flourLabel expand: true;
+				   add: flourInput width: 50;
+				   yourself);
+		  add: (SpBoxLayout newHorizontal
+				   add: doughHydratationLevelLabel expand: true;
+				   add: doughHydratationLevelInput width: 50;
+				   yourself);
+		  add: (SpBoxLayout newHorizontal
+				   add: saltRateLabel expand: true;
+				   add: saltRateInput width: 50;
+				   yourself);
+		  add: (SpBoxLayout newHorizontal
+				   add: sourdoughHydrationLevelLabel expand: true;
+				   add: sourdoughHydrationLevelInput width: 50;
+				   yourself);
+		  add: (SpBoxLayout newHorizontal
+				   add: sourdoughFlourRateLabel expand: true;
+				   add: sourdoughFlourRateInput width: 50;
+				   yourself);
+		  yourself
+]
+
 { #category : #accessing }
 SourdoughQuantityWishedPresenter >> doughHydratationLevelInput [
 	^ doughHydratationLevelInput
@@ -105,41 +135,6 @@ SourdoughQuantityWishedPresenter >> initializePresenters [
 ]
 
 { #category : #accessing }
-SourdoughQuantityWishedPresenter >> layout [
-
-	^ SpBoxLayout newVertical spacing: 2;
-		  add: (SpBoxLayout newHorizontal
-				   add: #requiredQuantityLabel;
-				   yourself);
-		  add: (SpBoxLayout newHorizontal
-				   add: #flourLabel expand: true;
-				   add: #flourInput width: 50;
-				   yourself);
-		  add: (SpBoxLayout newHorizontal
-				   add: #doughHydratationLevelLabel expand: true;
-				   add: #doughHydratationLevelInput width: 50;
-				   yourself);
-		  add: (SpBoxLayout newHorizontal
-				   add: #saltRateLabel expand: true;
-				   add: #saltRateInput width: 50;
-				   yourself);
-		  add: (SpBoxLayout newHorizontal
-				   add: #sourdoughHydrationLevelLabel expand: true;
-				   add: #sourdoughHydrationLevelInput width: 50;
-				   yourself);
-		  add: (SpBoxLayout newHorizontal
-				   add: #sourdoughFlourRateLabel expand: true;
-				   add: #sourdoughFlourRateInput width: 50;
-				   yourself);
-		  yourself
-]
-
-{ #category : #'instance creation' }
-SourdoughQuantityWishedPresenter >> open [
-<script: 'self new openWithSpec'>
-]
-
-{ #category : #accessing }
 SourdoughQuantityWishedPresenter >> requiredQuantityLabel [
 	^ requiredQuantityLabel
 ]
@@ -207,4 +202,11 @@ SourdoughQuantityWishedPresenter >> sourdoughHydrationLevelLabel [
 { #category : #accessing }
 SourdoughQuantityWishedPresenter >> sourdoughHydrationLevelLabel: anObject [
 	sourdoughHydrationLevelLabel := anObject
+]
+
+{ #category : #'instance creation' }
+SourdoughQuantityWishedPresenter >> start [
+
+	<script: 'self new open'>
+	
 ]

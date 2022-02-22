@@ -34,6 +34,18 @@ SourdoughPresenter >> connectPresenters [
 			self announcingObject valueChanged ]
 ]
 
+{ #category : #layout }
+SourdoughPresenter >> defaultLayout [ 
+
+	^ SpBoxLayout newVertical
+		  add: (SpBoxLayout newHorizontal spacing: 5;
+				   add: wishedQuantity;
+				   add: requiredQuantity;
+				   yourself)  expand: true;
+		  add: information expand: true;
+		  yourself
+]
+
 { #category : #'model updates' }
 SourdoughPresenter >> fillFormWithWorkingModel [
 
@@ -99,26 +111,16 @@ SourdoughPresenter >> initializeWindow: aWindowPresenter [
 		aboutText: 'Small tool to calculate proportion of sourdough'
 ]
 
-{ #category : #accessing }
-SourdoughPresenter >> layout [
-
-	^ SpBoxLayout newVertical
-		  add: (SpBoxLayout newHorizontal spacing: 5;
-				   add: #wishedQuantity;
-				   add: #requiredQuantity;
-				   yourself)  expand: true;
-		  add: #information expand: true;
-		  yourself
-]
-
 { #category : #api }
 SourdoughPresenter >> modelChanged [
 	self fillFormWithWorkingModel
 ]
 
 { #category : #'instance creation' }
-SourdoughPresenter >> open [
-<script: 'self new openWithSpec'>
+SourdoughPresenter >> start [
+
+	<script: 'self new open'>
+	
 ]
 
 { #category : #accessing }
