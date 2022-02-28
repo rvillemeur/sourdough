@@ -9,20 +9,20 @@ Class {
 
 { #category : #styling }
 SourdoughConfiguration >> styleSheet [
-	^ SpStyleSTONReader
+	^ SpStyle defaultStyleSheet, (SpStyleSTONReader
 		fromString:
 			'
 .application [
-	.textInputField [ Draw { #color: #blue} ],
+	Draw { #color: #darkGray, #backgroundColor: #paleBlue},
+	.textInputField [ Draw { #backgroundColor: #lightRed} ],
 	.label [
 		Font {  #name: "Verdana", #size: 10, #italic: false, #bold: true}],
-		Draw { #color: #darkGray, #backgroundColor: #lightGray},
 		.section [ 
-			Draw { #color: #blue, #backgroundColor: #lightGray},
-			Font {  #name: "Verdana", #size: 12, #italic: true, #bold: true}],
-		.disabled [ Draw { #color: #veryLightGray} ]
+			Draw { #color: #blue, #backgroundColor: #lightYellow},
+			Font {  #name: "Courier New", #size: 13, #italic: true, #bold: true}],
+		.disabled [ Draw { #backgroundColor: #lightGreen} ]
 	]
 
 ]
-'
+')
 ]

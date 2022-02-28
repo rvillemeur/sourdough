@@ -98,7 +98,6 @@ SourdoughPresenter >> initializePresenters [
 		                    SourdoughQuantityRequiredPresenter.
 	wishedQuantity := self instantiate: SourdoughQuantityWishedPresenter.
 	information := self instantiate: SourdoughInformationPresenter.
-	self layout: self layout
 ]
 
 { #category : #initialization }
